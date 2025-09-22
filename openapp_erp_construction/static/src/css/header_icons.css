@@ -1,0 +1,64 @@
+/* =============== CẤU HÌNH CHUNG =============== */
+:root{
+  --oa-icon-size:14px;
+  --oa-icon-left:.70rem;
+  --oa-icon-opacity:.72;
+}
+
+/* Nhóm nút xây dựng: thêm padding để chèn icon */
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_submit"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_approve"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_done"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_close"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_view_po_lines"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_view_purchase_orders"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_create_internal_transfer"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_release_retention"]{
+  position:relative; padding-left:2rem;
+}
+
+/* Pseudo icon cho nhóm trên */
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_submit"]::before,
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_approve"]::before,
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_done"]::before,
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_close"]::before,
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_view_po_lines"]::before,
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_view_purchase_orders"]::before,
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_create_internal_transfer"]::before,
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_release_retention"]::before{
+  font-family:"Font Awesome 6 Free","Font Awesome 5 Free","FontAwesome","Font Awesome 6 Pro","Font Awesome 5 Pro","FontAwesomeSolid"!important;
+  font-weight:900; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  pointer-events:none; position:absolute; left:var(--oa-icon-left); top:50%;
+  transform:translateY(-50%); display:inline-block; font-size:var(--oa-icon-size);
+  line-height:1; opacity:var(--oa-icon-opacity);
+}
+
+/* Mapping icons */
+.o_form_statusbar .btn[name="action_submit"]::before{content:"\f1d8"}       /* paper-plane */
+.o_form_statusbar .btn[name="action_approve"]::before{content:"\f560"}      /* check-double */
+.o_form_statusbar .btn[name="action_done"]::before{content:"\f058"}         /* check-circle */
+.o_form_statusbar .btn[name="action_close"]::before{content:"\f057"}        /* times-circle */
+.o_form_statusbar .btn[name="action_view_po_lines"]::before{content:"\f03a"}/* list */
+.o_form_statusbar .btn[name="action_view_purchase_orders"]::before{content:"\f570"} /* file-invoice-dollar */
+
+.o_form_statusbar .btn[name="action_create_purchase"]::before{content:"\f570"} /* file-invoice-dollar */
+.o_form_statusbar .btn[name="action_create_internal_transfer"]::before{content:"\f0d1"} /* truck */
+
+/* Smart button “Phiếu kho” */
+.oe_button_box .oe_stat_button[name="action_view_pickings"]::before{content:"\f0d1"} /* truck */
+
+/* Retention – Nhả giữ lại */
+.o_form_statusbar .btn[name="action_release_retention"]::before{content:"\f09c"} /* unlock */
+
+/* Smart buttons riêng (không dùng :has) */
+.oe_button_box .oe_stat_button[name="action_open_move"]::before{content:"\f570"} /* invoice */
+.oe_button_box .oe_stat_button[name="action_open_retention_ledger"]::before{content:"\f023"} /* lock */
+
+/* Mở rộng: tạo PO/picking bằng pattern tên */
+.o_form_statusbar .btn[name="action_create_po"]::before,
+.o_form_statusbar .btn[name^="action_create_"][name*="_po"]::before{content:"\f570"}
+
+.o_form_statusbar .btn[name="action_create_issue_picking"]::before,
+.o_form_statusbar .btn[name^="action_create_"][name*="picking"]::before{content:"\f0d1"}
+
+.o_form_statusbar .btn[name="action_done"]::before{content:"\f058"}

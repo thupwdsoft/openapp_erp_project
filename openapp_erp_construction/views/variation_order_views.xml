@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- LIST -->
+  <record id="view_openapp_vo_list" model="ir.ui.view">
+    <field name="name">openapp.vo.list</field>
+    <field name="model">openapp.variation.order</field>
+    <field name="arch" type="xml">
+      <list string="Lệnh thay đổi (VO)" default_order="date desc">
+        <field name="name"/>
+        <field name="project_id"/>
+        <field name="date"/>
+        <field name="amount_change"/>
+        <field name="state" widget="badge"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- FORM -->
+  <record id="view_openapp_vo_form" model="ir.ui.view">
+    <field name="name">openapp.vo.form</field>
+    <field name="model">openapp.variation.order</field>
+    <field name="arch" type="xml">
+      <form string="Lệnh thay đổi (VO)">
+        <header>
+          <!-- Hiện nút Phê duyệt khi đang nháp -->
+          <button name="action_approve"
+                  type="object"
+                  class="oe_highlight"
+                  string="Phê duyệt"
+                  invisible="state != 'draft'"/>
+
+          <!-- Hiện nút Đặt về nháp khi đã phê duyệt -->
+          <button name="action_set_to_draft"
+                  type="object"
+                  string="Đặt về nháp"
+                  invisible="state != 'approved'"/>
+
+          <field name="state" widget="statusbar" statusbar_visible="draft,approved"/>
+        </header>
+
+
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button name="action_view_sale_orders" type="object" class="oe_stat_button" title="Đơn bán">
+              <i class="fa fa-shopping-cart"/><span class="o_stat_text">Đơn bán</span>
+            </button>
+            <button name="action_view_invoices" type="object" class="oe_stat_button" title="Hóa đơn">
+              <i class="fa fa-file"/><span class="o_stat_text">Hóa đơn</span>
+            </button>
+          </div>
+
+          <group>
+            <field name="name" readonly="1"/>
+            <field name="project_id"/>
+            <field name="date"/>
+            <field name="description"/>
+            <field name="amount_change"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- ACTION -->
+  <record id="action_openapp_vo" model="ir.actions.act_window">
+    <field name="name">Lệnh thay đổi (VO)</field>
+    <field name="res_model">openapp.variation.order</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+</odoo>

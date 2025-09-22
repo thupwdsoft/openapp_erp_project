@@ -1,0 +1,203 @@
+/* =============== CẤU HÌNH CHUNG =============== */
+:root{
+  --oa-icon-size:14px;
+  --oa-icon-left:.70rem;
+  --oa-icon-opacity:.72;
+}
+
+/* Không tắt icon smart button (chỉ ẩn KPI info cũ) */
+.o_control_panel_actions .o_stat_info::before,
+.o_control_panel_actions .o_stat_button:not(.oe_stat_button)::before{
+  content:none !important;
+}
+
+/* ==== Danh sách nút (core) cần chèn icon: set padding-left ==== */
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_update_quantity_on_hand"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_open_quants"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_replenish"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_product_replenish"],
+.o_form_statusbar .o_statusbar_buttons .btn[name*="label_layout"],
+.o_form_statusbar .o_statusbar_buttons .btn[name*="label"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_confirm"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_assign"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="button_validate"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="do_print_picking"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_cancel"],
+.o_form_statusbar .o_statusbar_buttons .btn[type="action"][data-hotkey="o"],
+.o_form_statusbar .o_statusbar_buttons .btn[type="action"][data-hotkey="k"],
+/* PURCHASE */
+.o_form_statusbar .o_statusbar_buttons .btn[name="print_quotation"],
+/* SALE ORDER */
+.o_form_statusbar .o_statusbar_buttons #create_invoice,
+.o_form_statusbar .o_statusbar_buttons #create_invoice_percentage,
+.o_form_statusbar .o_statusbar_buttons #send_by_email_primary,
+.o_form_statusbar .o_statusbar_buttons #send_by_email,
+.o_form_statusbar .o_statusbar_buttons #action_confirm,
+.o_form_statusbar .o_statusbar_buttons .btn[name="create_invoice"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_preview_sale_order"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_print_answers"],
+/* INVOICE */
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_invoice_sent"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_print_pdf"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="preview_invoice"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_post"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="button_draft"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="button_cancel"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_reverse"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="button_hash"],
+/* WARRANTY / TICKET */
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_state_checking"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_state_repairing"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_state_done"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_state_cancel"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_report_helpdesk_ticket"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_send_warranty_email"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_print_warranty_card"],
+/* REPAIR */
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_create_repair_order"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_open_repair_order"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_receive_to_repair_zone"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_repair_cancel"],
+/* MAINTENANCE */
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_unreserve"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_create_maintenance_request"],
+.o_form_statusbar .o_statusbar_buttons .btn[type="action"][name="339"],
+.o_form_statusbar .o_statusbar_buttons .btn[type="action"][name="338"],
+/* STOCK RETURN PICKING */
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_view_picking"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_rfq_send"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_create_invoice"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_view_invoice"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="button_confirm"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="button_cancel"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="button_draft"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_open_quick_sale"],
+/* HR EXPENSE SHEET */
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_submit_sheet"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_approve_sheet"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_refuse_sheet"],
+.o_form_statusbar .o_statusbar_buttons .btn[name="action_post_entries"]{
+  position:relative; padding-left:2rem;
+}
+
+/* ::before cho nhóm trên */
+.o_form_statusbar .o_statusbar_buttons .btn[name],
+.o_form_statusbar .o_statusbar_buttons #create_invoice,
+.o_form_statusbar .o_statusbar_buttons #create_invoice_percentage,
+.o_form_statusbar .o_statusbar_buttons #send_by_email_primary,
+.o_form_statusbar .o_statusbar_buttons #send_by_email,
+.o_form_statusbar .o_statusbar_buttons #action_confirm{
+  /* nothing; chỉ để gom nhóm */
+}
+.o_form_statusbar .o_statusbar_buttons .btn[name]:before,
+.o_form_statusbar .o_statusbar_buttons #create_invoice:before,
+.o_form_statusbar .o_statusbar_buttons #create_invoice_percentage:before,
+.o_form_statusbar .o_statusbar_buttons #send_by_email_primary:before,
+.o_form_statusbar .o_statusbar_buttons #send_by_email:before,
+.o_form_statusbar .o_statusbar_buttons #action_confirm:before{
+  font-family:"Font Awesome 6 Free","Font Awesome 5 Free","FontAwesome","Font Awesome 6 Pro","Font Awesome 5 Pro","FontAwesomeSolid"!important;
+  font-weight:900;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  pointer-events:none; position:absolute; left:var(--oa-icon-left); top:50%;
+  transform:translateY(-50%); display:inline-block; font-size:var(--oa-icon-size);
+  line-height:1; opacity:var(--oa-icon-opacity);
+}
+
+/* Nút highlight icon đậm hơn */
+.o_form_statusbar .o_statusbar_buttons .btn.oe_highlight::before{opacity:.9}
+
+/* ===== MAPPING ICONS ===== */
+/* PRODUCT */
+.o_form_statusbar .btn[name="action_update_quantity_on_hand"]::before,
+.o_form_statusbar .btn[name="action_open_quants"]::before{content:"\f1b3"}
+.o_form_statusbar .btn[name="action_replenish"]::before,
+.o_form_statusbar .btn[name="action_product_replenish"]::before{content:"\f217"}
+.o_form_statusbar .btn[name*="label_layout"]::before,
+.o_form_statusbar .btn[name*="label"]::before{content:"\f02c"}
+
+/* PICKING */
+.o_form_statusbar .btn[name="action_confirm"]::before{content:"\f046"}
+.o_form_statusbar .btn[name="action_assign"]::before{content:"\f1b3"}
+.o_form_statusbar .btn[name="button_validate"]::before{content:"\f00c"}
+.o_form_statusbar .btn[name="do_print_picking"]::before,
+.o_form_statusbar .btn[type="action"][data-hotkey="o"]::before{content:"\f02f"}
+.o_form_statusbar .btn[type="action"][data-hotkey="k"]::before{content:"\f0e2"}
+.o_form_statusbar .btn[name="action_cancel"]::before{content:"\f00d"}
+
+/* PURCHASE */
+.o_form_statusbar .btn[name="print_quotation"]::before{content:"\f02f"}
+
+/* SALE ORDER */
+.o_form_statusbar #create_invoice::before,
+.o_form_statusbar .btn[name="create_invoice"]::before{content:"\f15c"}
+.o_form_statusbar #create_invoice_percentage::before{content:"\f295"}
+.o_form_statusbar #send_by_email_primary::before,
+.o_form_statusbar #send_by_email::before{content:"\f0e0"}
+.o_form_statusbar .btn[name="action_preview_sale_order"]::before{content:"\f06e"}
+.o_form_statusbar #action_confirm::before,
+.o_form_statusbar .btn[name="action_confirm"]#action_confirm::before{content:"\f00c"}
+.o_form_statusbar .btn[name="action_print_answers"]#action_print_answers::before{content:"\f02f"}
+
+/* ACCOUNT.MOVE */
+.o_form_statusbar .btn[name="action_invoice_sent"]::before{content:"\f0e0"}
+.o_form_statusbar .btn[name="action_print_pdf"]::before{content:"\f02f"}
+.o_form_statusbar .btn[name="preview_invoice"]::before{content:"\f06e"}
+.o_form_statusbar .btn[name="action_post"]::before{content:"\f00c"}
+.o_form_statusbar .btn[name="button_draft"]::before{content:"\f0e2"}
+.o_form_statusbar .btn[name="button_cancel"]::before{content:"\f00d"}
+.o_form_statusbar .btn[name="action_reverse"]::before{content:"\f112"}
+.o_form_statusbar .btn[name="button_hash"]::before{content:"\f023"}
+
+/* WARRANTY / TICKET */
+.o_form_statusbar .btn[name="action_state_checking"]::before{content:"\f002"!important}
+.o_form_statusbar .btn[name="action_state_repairing"]::before{content:"\f0ad"!important}
+.o_form_statusbar .btn[name="action_state_done"]::before{content:"\f00c"!important}
+.o_form_statusbar .btn[name="action_state_cancel"]::before{content:"\f00d"!important}
+.o_form_statusbar .btn[name="action_report_helpdesk_ticket"]::before{content:"\f02f"!important}
+
+/* Button box (core) */
+.oe_button_box .oe_stat_button[name="action_open_warranty_card"]::before,
+.oe_button_box .o_stat_button[name="action_open_warranty_card"]::before{content:"\f0c1"!important}
+.oe_button_box .oe_stat_button[name="action_create_ticket"]::before,
+.oe_button_box .o_stat_button[name="action_create_ticket"]::before{content:"\f145"!important}
+.oe_button_box .oe_stat_button[name="action_view_warranty_tickets"]::before,
+.oe_button_box .o_stat_button[name="action_view_warranty_tickets"]::before{content:"\f1da"!important}
+
+/* REPAIR */
+.o_form_statusbar .btn[name="action_create_repair_order"]::before,
+.o_form_statusbar .btn[name="action_open_repair_order"]::before{content:"\f0ad"}
+.o_form_statusbar .btn[name="action_validate"]::before{content:"\f00c"}
+.o_form_statusbar .btn[name="action_repair_start"]::before{content:"\f04b"}
+.o_form_statusbar .btn[name="action_repair_end"]::before{content:"\f04d"}
+.o_form_statusbar .btn[name="action_make_sale_order"]::before,
+.o_form_statusbar .btn[name="action_create_sale_order"]::before,
+.o_form_statusbar .btn[name="action_repair_order_make_sale_order"]::before{content:"\f0f6"}
+.o_form_statusbar .btn[name="action_repair_cancel"]::before{content:"\f00d"}
+.o_form_statusbar .btn[name="action_receive_to_repair_zone"]::before{content:"\f01c"}
+
+/* MAINTENANCE */
+.o_form_statusbar .btn[name="action_unreserve"]::before{content:"\f0e2"}
+.o_form_statusbar .btn[name="action_create_maintenance_request"]::before{content:"\f0ad"}
+
+/* BỔ SUNG HÀNG */
+.o_form_statusbar .btn[name="action_product_replenish"]::before,
+.o_form_statusbar .btn[name="action_replenish"]::before,
+.o_form_statusbar .btn[type="action"][name="338"]::before,
+.o_form_statusbar .btn[type="action"][name="339"]::before{content:"\f217"}
+
+/* STOCK RETURN PICKING */
+.o_form_statusbar .btn[name="action_view_picking"]::before{content:"\f0d1"}
+.o_form_statusbar .btn[name="action_rfq_send"]::before{content:"\f0e0"}
+.o_form_statusbar .btn[name="action_create_invoice"]::before{content:"\f15c"}
+.o_form_statusbar .btn[name="action_view_invoice"]::before{content:"\f06e"}
+.o_form_statusbar .btn[name="button_confirm"]::before{content:"\f00c"}
+.o_form_statusbar .btn[name="button_cancel"]::before{content:"\f00d"}
+.o_form_statusbar .btn[name="button_done"]::before{content:"\f023"}
+.o_form_statusbar .btn[name="button_unlock"]::before{content:"\f09c"}
+.o_form_statusbar .btn[name="button_draft"]::before{content:"\f0e2"}
+
+/* HR EXPENSE SHEET */
+.o_form_statusbar .btn[name="action_submit_sheet"]::before{content:"\f1d8"}
+.o_form_statusbar .btn[name="action_approve_sheet"]::before{content:"\f560"}
+.o_form_statusbar .btn[name="action_refuse_sheet"]::before{content:"\f00d"}
+.o_form_statusbar .btn[name="action_post_entries"]::before{content:"\f02d"} /* book */

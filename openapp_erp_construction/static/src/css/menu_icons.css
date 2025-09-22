@@ -1,0 +1,139 @@
+/* Base: chừa chỗ icon trước chữ */
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app{
+  position: relative;
+  padding: 8px 0 8px 40px; /* 40px = 28px + khoảng đệm dễ nhìn */
+  font-weight: 600;
+}
+
+/* Pseudo icon — KHÔNG set content ở base để mục không map icon không bị thụt trái */
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app::before{
+  content: none; /* chỉ bật ở các rule mapping */
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  width: 18px; height: 18px;
+  background-repeat: no-repeat; background-size: contain;
+  opacity: .95;
+}
+
+/* ==== Mapping icon theo data-menu-xmlid (ổn định nhất) ==== */
+/* Mỗi rule dưới đây bật ::before bằng content:"" + background-image */
+
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="mail."]::before{                content:""; background-image:url('/mail/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="project_todo."]::before{         content:""; background-image:url('/project_todo/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="calendar."]::before{             content:""; background-image:url('/calendar/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="contacts."]::before{             content:""; background-image:url('/contacts/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="sale."]::before{                 content:""; background-image:url('/sale/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="spreadsheet_dashboard."]::before{content:""; background-image:url('/spreadsheet_dashboard/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="account."]::before{              content:""; background-image:url('/account/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="project."]::before{              content:""; background-image:url('/project/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="website."]::before{              content:""; background-image:url('/website/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="mass_mailing."]::before{         content:""; background-image:url('/mass_mailing/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="survey."]::before{               content:""; background-image:url('/survey/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="purchase."]::before{             content:""; background-image:url('/purchase/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="stock."]::before{                content:""; background-image:url('/stock/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="maintenance."]::before{          content:""; background-image:url('/maintenance/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="repair."]::before{               content:""; background-image:url('/repair/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="hr."]::before{                   content:""; background-image:url('/hr/static/description/icon.png'); }
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="link_tracker."]::before{         content:""; background-image:url('/link_tracker/static/description/icon.png'); }
+
+/* Apps & Settings — dùng Font Awesome làm icon (khỏi phụ thuộc ảnh) */
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[href="/odoo/apps"]::before{
+  content:"\f00a"; font-family:"Font Awesome 5 Free"; font-weight:900;
+  background:none; width:auto; height:auto; font-size:16px;
+}
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[href="/odoo/settings"]::before,
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="base_setup."]::before{
+  content:"\f013"; font-family:"Font Awesome 5 Free"; font-weight:900;
+  background:none; width:auto; height:auto; font-size:16px;
+}
+
+/* ============ Manufacturing (Sản xuất) ============ */
+/* Bắt theo data-menu-xmlid của app Sản xuất */
+.o_popover.o-dropdown--menu.dropdown-menu
+ > a.o_app[data-menu-xmlid^="mrp."]::before{
+  content:"";
+  background-image:url('/mrp/static/description/icon.png');
+}
+
+/* (dự phòng) Nếu bản Odoo không set data-menu-xmlid,
+   bắt thêm theo href của app Sản xuất */
+.o_popover.o-dropdown--menu.dropdown-menu
+ > a.o_app[href="/odoo/manufacturing"]::before{
+  content:"";
+  background-image:url('/mrp/static/description/icon.png');
+}
+
+/* ==== CRM ==== */
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="crm."]::before{
+  content:""; background-image:url('/crm/static/description/icon.png');
+}
+/* Fallback theo href (nếu thiếu data-menu-xmlid) */
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[href="/odoo/crm"]::before{
+  content:""; background-image:url('/crm/static/description/icon.png');
+}
+
+/* ==== Chi phí (Expenses) ==== */
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="hr_expense."]::before{
+  content:""; background-image:url('/hr_expense/static/description/icon.png');
+}
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[href="/odoo/expenses"]::before{
+  content:""; background-image:url('/hr_expense/static/description/icon.png');
+}
+
+/* ==== Đội xe (Fleet) ==== */
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="fleet."]::before{
+  content:""; background-image:url('/fleet/static/description/icon.png');
+}
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[href="/odoo/fleet"]::before{
+  content:""; background-image:url('/fleet/static/description/icon.png');
+}
+
+/* ==== Chấm công (Attendance) ==== */
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="hr_attendance."]::before{
+  content:""; background-image:url('/hr_attendance/static/description/icon.png');
+}
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[href="/odoo/attendance"]::before{
+  content:""; background-image:url('/hr_attendance/static/description/icon.png');
+}
+
+
+/* ==== Bảng chấm công (Timesheets) ==== */
+.o_popover.o-dropdown--menu.dropdown-menu
+ > a.o_app[data-menu-xmlid^="hr_timesheet."]::before{
+  content:""; background-image:url('/hr_timesheet/static/description/icon.png');
+}
+/* Fallback theo href */
+.o_popover.o-dropdown--menu.dropdown-menu
+ > a.o_app[href="/odoo/timesheets"]::before,
+.o_popover.o-dropdown--menu.dropdown-menu
+ > a.o_app[href="/odoo/hr_timesheet"]::before{
+  content:""; background-image:url('/hr_timesheet/static/description/icon.png');
+}
+
+/* ==== Nghỉ phép (Time Off) ==== */
+.o_popover.o-dropdown--menu.dropdown-menu
+ > a.o_app[data-menu-xmlid^="hr_holidays."]::before{
+  content:""; background-image:url('/hr_holidays/static/description/icon.png');
+}
+/* Fallback theo href */
+.o_popover.o-dropdown--menu.dropdown-menu
+ > a.o_app[href="/odoo/time_off"]::before,
+.o_popover.o-dropdown--menu.dropdown-menu
+ > a.o_app[href="/odoo/hr_holidays"]::before{
+  content:""; background-image:url('/hr_holidays/static/description/icon.png');
+}
+
+/* ==== Quản lý thi công (Construction) ==== */
+/* Match chính xác menu gốc của app Thi công */
+.o_popover.o-dropdown--menu.dropdown-menu
+ > a.o_app[data-menu-xmlid="openapp_erp_construction.menu_openapp_construction_root"]::before{
+  content:"";
+  background-image:url('/openapp_erp_construction/static/description/icon.png');
+}
+
+/* (tuỳ chọn) match rộng cho mọi menu con thuộc module thi công */
+/* App icon mapping for Thi công */
+.o_popover.o-dropdown--menu.dropdown-menu > a.o_app[data-menu-xmlid^="openapp_erp_construction."]::before{
+  content:"";
+  background-image:url('/openapp_erp_construction/static/description/icon.svg');
+}
+

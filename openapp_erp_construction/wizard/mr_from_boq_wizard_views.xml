@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><odoo>
+<record id="view_openapp_mr_from_boq_wizard" model="ir.ui.view"><field name="name">openapp.mr.from.boq.wizard.form</field><field name="model">openapp.mr.from.boq.wizard</field>
+<field name="arch" type="xml"><form string="Tạo MR từ BoQ"><sheet><group><field name="boq_id"/><field name="project_id" readonly="1"/></group>
+<field name="line_ids"><list editable="bottom"><field name="name"/><field name="product_id"/><field name="uom_id"/><field name="quantity"/></list></field></sheet>
+<footer><button name="action_create_mr" type="object" string="Tạo MR" class="btn-primary"/><button string="Đóng" class="btn-secondary" special="cancel"/></footer></form></field></record>
+<record id="action_openapp_mr_from_boq_wizard" model="ir.actions.act_window"><field name="name">Tạo MR từ BoQ</field><field name="res_model">openapp.mr.from.boq.wizard</field><field name="view_mode">form</field><field name="target">new</field></record>
+<record id="boq_form_add_button_create_mr" model="ir.ui.view"><field name="name">openapp.boq.form.create.mr</field><field name="model">openapp.boq</field><field name="inherit_id" ref="openapp_erp_construction.view_openapp_boq_form"/>
+<field name="arch" type="xml"><xpath expr="//header" position="inside"><button name="%(openapp_erp_construction.action_openapp_mr_from_boq_wizard)d" type="action" string="Tạo MR" class="oe_highlight" invisible="state != 'confirmed'"/></xpath></field></record>
+</odoo>

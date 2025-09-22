@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_picking_form_add_onhand" model="ir.ui.view">
+    <field name="name">stock.picking.form.add.onhand.src</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+      <!-- chèn ở bảng hoạt động -->
+      <xpath expr="//field[@name='move_ids_without_package']/list/field[@name='product_uom_qty']"
+             position="after">
+        <field name="x_qty_onhand_src" string="SL tồn (nguồn)" readonly="1"/>
+      </xpath>
+    </field>
+  </record>
+</odoo>

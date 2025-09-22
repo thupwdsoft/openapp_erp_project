@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Extend form hóa đơn để nhập giữ lại (đúng field) -->
+  <record id="view_move_form_retention_inherit" model="ir.ui.view">
+    <field name="name">account.move.form.retention.inherit</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//sheet/group" position="after">
+        <group string="Giữ lại (Retention)">
+          <field name="retention_percent"/>
+          <field name="retention_amount" readonly="1"/>
+          <field name="retention_release_date"/>
+        </group>
+      </xpath>
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button type="object"
+                name="action_open_retention_ledger"
+                class="oe_stat_button">
+          <field name="retention_ledger_count" string="Giữ lại" widget="statinfo"/>
+        </button>
+      </xpath>
+    </field>
+  </record>
+</odoo>

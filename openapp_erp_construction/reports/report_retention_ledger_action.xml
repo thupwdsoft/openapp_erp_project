@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <report
+    id="action_report_retention_ledger"
+    model="openapp.retention.ledger"
+    string="In Sổ Giữ Lại"
+    report_type="qweb-pdf"
+    name="openapp_erp_construction.report_retention_ledger_document"
+    file="openapp_erp_construction.report_retention_ledger_document"
+    print_report_name="'Retention - %s' % (object.name or '')"
+  />
+</odoo>

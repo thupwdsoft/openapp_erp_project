@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="view_openapp_site_dashboard_kanban" model="ir.ui.view">
+    <field name="name">openapp.site.dashboard.kanban</field>
+    <field name="model">openapp.site.dashboard</field>
+    <field name="arch" type="xml">
+      <kanban class="o_kanban_small_column o_kanban_ungrouped" default_group_by="">
+        <templates>
+          <t t-name="kanban-box">
+            <div class="o_kanban_card o_kanban_aggregate">
+              <div class="o_kanban_card_content">
+                <div class="o_kanban_title">Tổng quan công trình</div>
+
+                <div class="o_row">
+                  <div class="o_kanban_primary o_kanban_card_content" style="min-width:300px; margin-right:16px;">
+                    <div class="o_kanban_title">Phiếu nhập kho</div>
+                    <div class="o_row" style="margin-top:8px;">
+                      <div style="margin-right:24px;">
+                        <div class="o_stat_value"><t t-esc="record.receipt_open.value or 0"/></div>
+                        <div class="text-muted">Cần nhập</div>
+                      </div>
+                      <div>
+                        <div>Trễ: <t t-esc="record.receipt_late.value or 0"/></div>
+                        <div>Hoạt động: <t t-esc="record.receipt_working.value or 0"/></div>
+                      </div>
+                    </div>
+                    <button type="object" name="action_open_receipts" class="btn btn-primary" style="margin-top:8px;">Mở</button>
+                  </div>
+
+                  <div class="o_kanban_warning o_kanban_card_content" style="min-width:300px;">
+                    <div class="o_kanban_title">Phiếu xuất kho</div>
+                    <div class="o_row" style="margin-top:8px;">
+                      <div style="margin-right:24px;">
+                        <div class="o_stat_value"><t t-esc="record.delivery_open.value or 0"/></div>
+                        <div class="text-muted">Cần xuất</div>
+                      </div>
+                      <div>
+                        <div>Trễ: <t t-esc="record.delivery_late.value or 0"/></div>
+                        <div>Hoạt động: <t t-esc="record.delivery_working.value or 0"/></div>
+                      </div>
+                    </div>
+                    <button type="object" name="action_open_deliveries" class="btn btn-primary" style="margin-top:8px;">Mở</button>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <!-- Action Server để luôn mở đúng 1 bản ghi dashboard -->
+  <record id="action_openapp_site_dashboard" model="ir.actions.server">
+    <field name="name">Tổng quan công trình</field>
+    <field name="model_id" ref="model_openapp_site_dashboard"/>
+    <field name="state">code</field>
+    <field name="code">action = env['openapp.site.dashboard'].action_open_dashboard()</field>
+  </record>
+
+  <menuitem id="menu_openapp_site_dashboard"
+            name="Tổng quan công trình"
+            parent="stock.menu_stock_warehouse_mgmt"
+            action="action_openapp_site_dashboard"
+            sequence="25"/>
+
+</odoo>

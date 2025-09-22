@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- SEARCH -->
+  <record id="view_openapp_material_consumption_search" model="ir.ui.view">
+    <field name="name">openapp.material.consumption.search</field>
+    <field name="model">openapp.material.consumption</field>
+    <field name="arch" type="xml">
+      <search string="Tìm kiếm Tiêu thụ vật tư">
+        <field name="project_id"/>
+        <field name="mr_id"/>
+        <field name="product_id"/>
+
+        <!-- Tháng này: từ ngày đầu tháng hiện tại -->
+        <filter string="Tháng này" name="this_month"
+                domain="[('date','&gt;=', datetime.date(context_today().year, context_today().month, 1))]"/>
+
+        <!-- Năm nay: từ 01/01 năm hiện tại -->
+        <filter string="Năm nay" name="this_year"
+                domain="[('date','&gt;=', datetime.date(context_today().year, 1, 1))]"/>
+
+        <separator/>
+        <group expand="0" string="Nhóm theo">
+          <filter string="Công trình" name="group_by_project" context="{'group_by': 'project_id'}"/>
+          <filter string="Sản phẩm"   name="group_by_product" context="{'group_by': 'product_id'}"/>
+            <filter name="date" string="Ngày xuất" date="date"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+
+  <!-- PIVOT -->
+  <record id="view_openapp_material_consumption_pivot" model="ir.ui.view">
+    <field name="name">openapp.material.consumption.pivot</field>
+    <field name="model">openapp.material.consumption</field>
+    <field name="arch" type="xml">
+      <pivot string="Tiêu thụ vật tư">
+        <field name="qty_done" type="measure"/>
+        <field name="project_id" type="row"/>
+        <field name="product_id" type="col"/>
+      </pivot>
+    </field>
+  </record>
+
+  <!-- ACTION -->
+  <record id="action_openapp_material_consumption" model="ir.actions.act_window">
+    <field name="name">Tiêu thụ vật tư</field>
+    <field name="res_model">openapp.material.consumption</field>
+    <field name="view_mode">pivot,list</field>
+    <field name="search_view_id" ref="openapp_erp_construction.view_openapp_material_consumption_search"/>
+    <field name="context">{'group_by': 'project_id', 'search_default_this_month': 1}</field>
+  </record>
+</odoo>

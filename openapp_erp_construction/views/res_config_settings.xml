@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Settings: Retention (Odoo 18 friendly, không phụ thuộc <sheet>) -->
+  <record id="view_res_config_settings_retention" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.retention</field>
+    <field name="model">res.config.settings</field>
+    <!-- Kế thừa form Cài đặt Kế toán -->
+    <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+    <!-- Ưu tiên cao để chèn sau các block khác -->
+    <field name="priority">99</field>
+    <field name="arch" type="xml">
+
+      <!-- Chèn trực tiếp vào FORM (an toàn khi view không có <sheet>) -->
+      <xpath expr="//form" position="inside">
+        <div class="app_settings_block" string="Retention" data-string="Retention">
+          <h2>Công nợ giữ lại</h2>
+
+          <div class="row mt16 o_settings_container">
+
+            <!-- Bật/tắt tự động hạch toán -->
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="openapp_retention_reclass_enabled"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="openapp_retention_reclass_enabled"/>
+                <div class="text-muted">
+                  Khi ghi sổ hóa đơn có giữ lại, tự động ghi nhận vào Sổ Retention.
+                </div>
+              </div>
+            </div>
+
+            <!-- TK phải thu giữ lại -->
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="openapp_retention_receivable_id" options="{'no_create_edit': True}"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="openapp_retention_receivable_id"/>
+                <div class="text-muted">Tài khoản công nợ phải thu phần giữ lại.</div>
+              </div>
+            </div>
+
+            <!-- TK phải trả giữ lại -->
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="openapp_retention_payable_id" options="{'no_create_edit': True}"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="openapp_retention_payable_id"/>
+                <div class="text-muted">Tài khoản công nợ phải trả phần giữ lại.</div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="openapp_project_consume_location_id" options="{'no_create_edit': True}"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="openapp_project_consume_location_id"/>
+                <div class="text-muted">Địa điểm tiêu hao công trình (nếu bỏ trống dùng Customers).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </xpath>
+
+    </field>
+  </record>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- TASK: thêm tab + smart button Tài liệu -->
+  <record id="view_task_form_add_documents" model="ir.ui.view">
+    <field name="name">project.task.form.add.documents</field>
+    <field name="model">project.task</field>
+    <field name="inherit_id" ref="project.view_task_form2"/>
+    <field name="arch" type="xml">
+
+      <!-- Chèn tab Tài liệu (nếu form có notebook) -->
+      <xpath expr="//sheet/notebook" position="inside">
+        <page string="Tài liệu">
+          <group>
+            <field name="design_document_ids"
+                   widget="many2many_binary"
+                   domain="[('res_model','=','project.task'), ('res_id','=', id)]"
+                   context="{'default_res_model': 'project.task', 'default_res_id': id}"/>
+          </group>
+        </page>
+      </xpath>
+
+    </field>
+  </record>
+</odoo>

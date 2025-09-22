@@ -1,0 +1,142 @@
+/* ===== OpenApp Theme - custom_theme.css ===== */
+
+/* Brand */
+:root{
+  --NavBar-entry-backgroundColor: #3677a8;
+  --oa-brand:         #3677a8;  /* navbar */
+  --oa-brand-hover:   #1E5F87;
+  --oa-brand-active:  #17a2b8;
+  --oa-btn-primary:   #3677a8;
+
+  /* Statusbar palette (orange) */
+  --oa-orange:        #FBA93F;  /* current */
+  --oa-orange-dark:   #f89310;  /* pressed */
+  --oa-orange-2:      #FCC769;  /* hover / previous */
+  --o-navbar-badge-bg: #f89310;
+}
+
+.o_main_navbar .o_menu_systray .badge {
+    background-color: var(--o-navbar-badge-bg) !important;
+}
+
+/* Navbar */
+.o_main_navbar{ background-color: var(--oa-brand) !important; }
+.o_main_navbar .o_menu_brand,
+.o_main_navbar .dropdown-toggle,
+.o_main_navbar .oe_topbar_name,
+.o_main_navbar .o_menu_entry_lvl_1{ color: lab(98.84% -0.48 -0.72) !important; }
+
+.o_main_navbar .dropdown-menu{
+  background-color: var(--oa-brand-active) !important;
+  border: none !important;
+}
+.o_main_navbar .dropdown-menu .dropdown-item{ color:#fff !important; }
+.o_main_navbar .dropdown-menu .dropdown-item:hover,
+.o_main_navbar .dropdown-menu .dropdown-item:focus{
+  background-color: var(--oa-brand-hover) !important; color:#fff !important;
+}
+.o_main_navbar .dropdown-menu .dropdown-item.active,
+.o_main_navbar .dropdown-menu .dropdown-item:active{
+  background-color: var(--oa-brand) !important; color:#fff !important;
+}
+
+/* Primary button */
+.btn-primary{
+  background-color: var(--oa-btn-primary) !important;
+  border-color: var(--oa-btn-primary) !important;
+}
+
+.btn-primary:hover, .btn-primary:focus{
+  background-color: var(--oa-brand-hover) !important;
+  border-color: var(--oa-brand-hover) !important;
+}
+
+/* Readonly labels rõ hơn */
+.o_form_label.o_form_label_readonly{ opacity:1 !important; font-weight:500 !important; }
+
+/* Stat button trong form header */
+.o-form-buttonbox .oe_stat_button .o_button_icon{
+  font-size: 1.5em; color: #FBA93F !important;
+}
+
+/* ===== Statusbar (các nút bước) ===== */
+/* Base cho tất cả step buttons */
+.o_field_statusbar .o_statusbar_status .btn{
+  --btn-color: #212529;
+  --btn-bg: #fff;
+  --btn-border-color: var(--oa-orange-2);
+
+  --btn-hover-bg: var(--oa-orange-2);
+  --btn-hover-border-color: var(--oa-orange-2);
+
+  --btn-active-bg: var(--oa-orange-dark);
+  --btn-active-border-color: var(--oa-orange);
+
+  border-width: 1px !important;
+  box-shadow: none !important;
+}
+
+/* ===== Statusbar: nút đang ACTIVE (aria-current="step") ===== */
+/* Chữ vàng + viền trắng, giữ nguyên nền */
+.o_field_statusbar .o_statusbar_status .btn[aria-current="step"],
+.o_field_statusbar .o_statusbar_status .o_arrow_button_current {
+    color: #ffffff !important;
+    background-color: #f69210 !important;
+    border: solid 1px color(#ffffff)  !important;
+}
+
+/* Viền trắng cho mảng tam giác bên trái (pseudo before) */
+.o_field_statusbar .o_statusbar_status .btn[aria-current="step"]::before,
+.o_field_statusbar .o_statusbar_status .o_arrow_button_current::before {
+  border-color: #ffffff !important;
+}
+
+/* Viền trắng cho mũi tên bên phải (pseudo after) */
+.o_field_statusbar .o_statusbar_status .btn[aria-current="step"]::after,
+.o_field_statusbar .o_statusbar_status .o_arrow_button_current::after {
+  border-left-color: #ffffff !important;
+}
+
+/* Nếu theme dùng biến cho viền active thì set luôn để chắc ăn */
+.o_field_statusbar .o_statusbar_status{
+  --o-statusbar-border-active: #ffffff !important;
+}
+
+
+/* Warranty portal styles */
+.oa-steps{display:flex;gap:.75rem;list-style:none;padding-left:0}
+.oa-steps li{padding:.4rem .8rem;border:1px solid #ddd;border-radius:999px;background:#f8f9fa;color:#6c757d}
+.oa-steps li.active{border-color:#3677a8;color:#3677a8;background:#e7f1ff}
+.oa-steps li.success{border-color:#198754;color:#198754;background:#e8f5ee}
+.oa-steps li.cancel{border-color:#6c757d;color:#6c757d;background:#f1f1f1}
+
+/* Pad trái cho ô select (đang/khép lại) */
+.o_form_view select.o_input,
+.o_list_view select.o_input {
+  padding-left: 6px !important;
+}
+
+/* Khi Odoo render select bằng dropdown menu (OWL) */
+.o_select_menu .dropdown-menu .dropdown-item,
+.o-dropdown--menu .o-dropdown--menu__item {
+  padding-left: 6px !important;
+}
+
+/* Fallback cho native <option> (tuỳ trình duyệt có áp dụng hay không) */
+select.o_input > option {
+  padding-left: 6px;     /* nhiều trình duyệt sẽ bỏ qua; giữ để có gì dùng được */
+  text-indent: 6px;      /* mẹo thay thế trên vài browser */
+}
+
+/* Dropdown ở thanh menu trên cùng: ép top = 0 và chỉ bo tròn cạnh dưới */
+.o_popover.popover.o-dropdown--menu.dropdown-menu.mx-0 {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+}
+
+.dropdown-menu {
+    max-height: 90vh !important;
+    min-width: 200px !important;
+}

@@ -1,0 +1,67 @@
+<odoo>
+  <!-- SEARCH -->
+  <record id="view_openapp_job_costing_search" model="ir.ui.view">
+    <field name="name">openapp.job.costing.search</field>
+    <field name="model">openapp.job.costing.line</field>
+    <field name="arch" type="xml">
+      <search string="Tìm kiếm">
+        <field name="project_id"/>
+        <field name="mr_id"/>
+        <field name="product_id"/>
+        <field name="partner_id"/>
+        <filter name="date" string="Ngày" date="date"/>
+
+        <separator/>
+        <group expand="0" string="Nhóm theo">
+          <filter string="Dự án"   name="grp_project" context="{'group_by':'project_id'}"/>
+          <filter string="MR"      name="grp_mr"      context="{'group_by':'mr_id'}"/>
+          <filter string="Vật tư"  name="grp_product" context="{'group_by':'product_id'}"/>
+          <filter string="Ngày"    name="grp_date"    context="{'group_by':'date'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <!-- TREE -->
+  <record id="view_openapp_job_costing_tree" model="ir.ui.view">
+    <field name="name">openapp.job.costing.tree</field>
+    <field name="model">openapp.job.costing.line</field>
+    <field name="arch" type="xml">
+      <list string="Chi phí công trình (kho)" default_order="date desc">
+        <field name="project_id"/>
+        <field name="mr_id"/>
+        <field name="date"/>
+        <field name="product_id"/>
+        <field name="partner_id"/>
+        <field name="name"/>
+        <field name="debit"/>
+        <field name="credit"/>
+        <field name="amount"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- PIVOT -->
+  <record id="view_openapp_job_costing_pivot" model="ir.ui.view">
+    <field name="name">openapp.job.costing.pivot</field>
+    <field name="model">openapp.job.costing.line</field>
+    <field name="arch" type="xml">
+      <pivot string="Chi phí công trình (kho)">
+        <field name="amount" type="measure"/>
+        <field name="project_id" type="row"/>
+        <field name="mr_id" type="row"/>
+        <field name="product_id" type="col"/>
+        <field name="date" interval="month" type="col"/>
+      </pivot>
+    </field>
+  </record>
+
+  <!-- ACTION -->
+  <record id="action_openapp_job_costing" model="ir.actions.act_window">
+    <field name="name">Chi phí công trình</field>
+    <field name="res_model">openapp.job.costing.line</field>
+    <field name="view_mode">pivot,list</field>
+    <field name="search_view_id" ref="view_openapp_job_costing_search"/>
+    <field name="context">{'search_default_grp_project': 1}</field>
+  </record>
+</odoo>

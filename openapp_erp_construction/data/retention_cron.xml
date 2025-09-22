@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="ir_cron_retention_reminder" model="ir.cron">
+    <field name="name">Nhắc nhở Retention đến hạn</field>
+    <field name="model_id" ref="model_openapp_retention_ledger"/>
+    <field name="state">code</field>
+    <field name="code">model._cron_retention_reminder()</field>
+
+    <!-- chạy mỗi ngày 1 lần -->
+    <field name="interval_type">days</field>
+    <field name="interval_number">1</field>
+
+    <!-- chạy bằng superuser, kích hoạt ngay -->
+    <field name="user_id" ref="base.user_root"/>
+    <field name="active">True</field>
+
+    <!-- lần chạy đầu: sau 5 phút kể từ lúc cài/upgrade -->
+    <field name="nextcall" eval="(DateTime.now() + relativedelta(minutes=5)).strftime('%Y-%m-%d %H:%M:%S')"/>
+  </record>
+</odoo>

@@ -1,0 +1,138 @@
+/* luôn tính border vào kích thước */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Cột trung tâm kiểu ChatGPT */
+.o_ai_chat {
+  --ai-max-width: 900px;
+  --ai-side-pad: 24px;        /* full viewport */
+}
+
+/* Vùng chat */
+.o_ai_chat_window{
+  overflow: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: auto;     /* để JS quyết định smooth */
+  background:#f7f8fa;
+}
+
+/* Typing bubble (Zalo style) */
+.o_ai_typing_bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #fff;
+  border-radius: 20px;
+  color: #1e88e5;
+}
+.o_ai_typing_bubble span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1e88e5;
+  display: inline-block;
+  animation: oAiTypingBounce 1.4s infinite ease-in-out;
+  opacity: .4;
+}
+.o_ai_typing_bubble span:nth-child(2) { animation-delay: .2s; }
+.o_ai_typing_bubble span:nth-child(3) { animation-delay: .4s; }
+
+/* Thanh nhập dạng pill */
+.oa-inputbar{
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 9999px;
+  padding: 8px 56px 8px 12px; /* chừa chỗ nút gửi bên phải */
+  min-height: 56px;
+}
+.oa-inputbar__input{
+  flex: 1 1 auto;
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 40px;
+  max-height: 140px;
+  resize: none;
+  overflow-y: auto;
+}
+.oa-inputbar__send{
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border: 0;
+  border-radius: 9999px;
+  background: #1d9bf0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  cursor: pointer;
+}
+.oa-inputbar__send:active { transform: translateY(-50%) scale(.98); }
+
+/* Hàng tin nhắn */
+.oa-msg-row{ display:flex; margin: 6px 0; }
+
+/* Bot ở trái, full width (mobile) */
+.oa-msg-row.bot { justify-content: flex-start; }
+.oa-msg--bot{
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 16px 20px;
+  color: #1f2937;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+}
+
+/* Tablet/Desktop: 80% */
+@media (min-width: 768px) {
+  .oa-msg--bot { width: 80%; }
+}
+
+
+/* Bot đang gõ: giữ bubble nhỏ (auto width) */
+.oa-msg--bot.is-typing{
+  width:auto;
+  min-width: 80px;
+  background:transparent;
+  border:0;
+  padding:0;
+  margin-bottom: 16px;
+}
+
+/* User ở phải, gọn */
+.oa-msg-row.user{ justify-content:flex-end; }
+.oa-msg--user{
+  max-width:60%;
+  background:#1e88e5;
+  color:#fff;
+  border-radius:20px;
+  padding:10px 14px;
+  white-space:pre-wrap;
+}
+
+/* nguồn trích */
+.oa-source{ margin-top:8px; font-style:italic; color:#6b7280; }
+
+/* khoảng cách giữa các loại tin khác phía */
+.oa-msg-row.user + .oa-msg-row.bot { margin-top: 20px; }
+.oa-msg-row.bot  + .oa-msg-row.user { margin-top: 14px; }
+
+@keyframes oAiTypingBounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: .4; }
+  40%           { transform: translateY(-4px); opacity: 1; }
+}

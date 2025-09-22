@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_project_form_add_documents" model="ir.ui.view">
+    <field name="name">project.project.form.add.documents</field>
+    <field name="model">project.project</field>
+    <!-- DÙNG FORM GỐC ĐANG CÓ TRONG DB -->
+    <field name="inherit_id" ref="project.edit_project"/>
+    <field name="arch" type="xml">
+
+      <!-- TH1: nếu form có notebook -->
+      <xpath expr="//sheet/notebook" position="inside">
+        <page string="Tài liệu">
+          <group>
+            <field name="design_document_ids"
+                   widget="many2many_binary"
+                   domain="[('res_model','=','project.project'), ('res_id','=', id)]"
+                   context="{'default_res_model': 'project.project', 'default_res_id': id}"/>
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+</odoo>

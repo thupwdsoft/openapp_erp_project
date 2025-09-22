@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- (Giữ nguyên) Form kế thừa hóa đơn để nhập Retention -->
+  <record id="view_move_form_retention_inherit" model="ir.ui.view">
+    <field name="name">account.move.form.retention.inherit</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//sheet/group" position="after">
+        <group string="Giữ lại (Retention)">
+          <field name="retention_percent"/>
+          <field name="retention_amount" readonly="1"/>
+          <field name="retention_release_date"/>
+        </group>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- NEW: Smart button trên Hóa đơn -> mở Ledger -->
+  <record id="view_move_form_add_retention_button" model="ir.ui.view">
+    <field name="name">account.move.form.add.retention.button</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button type="object"
+                name="action_open_retention_ledger"
+                class="oe_stat_button"
+                icon="fa-lock">
+          <field name="retention_ledger_count" string="Giữ lại" widget="statinfo"/>
+        </button>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- TREE Ledger (giữ nguyên của bạn, có thể update cột nếu thích) -->
+  <record id="view_retention_list" model="ir.ui.view">
+    <field name="name">openapp.retention.list</field>
+    <field name="model">openapp.retention.ledger</field>
+    <field name="arch" type="xml">
+      <list string="Sổ giữ lại" default_order="release_date asc">
+        <field name="name"/>
+        <field name="company_id"/>
+        <field name="partner_id"/>
+        <field name="project_id"/>
+        <field name="move_id"/>
+        <field name="amount_base"/>
+        <field name="percent"/>
+        <field name="amount"/>
+        <field name="release_date"/>
+        <field name="state" widget="badge"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- FORM Ledger có smart button mở hóa đơn gốc -->
+  <record id="view_retention_form" model="ir.ui.view">
+    <field name="name">openapp.retention.form</field>
+    <field name="model">openapp.retention.ledger</field>
+    <field name="arch" type="xml">
+      <form string="Sổ giữ lại">
+        <header>
+          <button name="action_release_retention" type="object" string="Trả nốt công nợ giữa lại"
+                  class="btn-primary" invisible="state != 'open'"/>
+          <field name="state" widget="statusbar" statusbar_visible="open,released,cancel"/>
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button type="object"
+                    name="action_open_move"
+                    class="oe_stat_button"
+                    icon="fa-file-invoice">
+              <field name="move_id" widget="statinfo" string="Hóa đơn"/>
+            </button>
+          </div>
+
+          <group>
+            <field name="name" readonly="1"/>
+            <field name="company_id"/>
+            <field name="partner_id"/>
+            <field name="project_id"/>
+            <field name="move_id" readonly="1"/>
+            <field name="amount_base" readonly="1"/>
+            <field name="percent" readonly="1"/>
+            <field name="amount" readonly="1"/>
+            <field name="release_date"/>
+            <field name="released_move_id" readonly="1"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- NEW: PIVOT Ledger -->
+  <record id="view_openapp_retention_ledger_pivot" model="ir.ui.view">
+    <field name="name">openapp.retention.ledger.pivot</field>
+    <field name="model">openapp.retention.ledger</field>
+    <field name="arch" type="xml">
+      <pivot string="Báo cáo Giữ lại">
+        <field name="amount" type="measure"/>
+        <field name="project_id" type="row"/>
+        <field name="partner_id" type="col"/>
+        <field name="company_id" type="row"/>
+        <field name="state" type="row"/>
+      </pivot>
+    </field>
+  </record>
+
+  <!-- NEW: SEARCH Ledger (lọc mặc định công ty, group theo dự án) -->
+  <record id="view_openapp_retention_ledger_search" model="ir.ui.view">
+    <field name="name">openapp.retention.ledger.search</field>
+    <field name="model">openapp.retention.ledger</field>
+    <field name="arch" type="xml">
+      <search string="Tìm kiếm Retention">
+        <filter name="company_my" string="Công ty của tôi"
+                domain="[('company_id','=',uid.company_id.id)]"/>
+        <field name="company_id"/>
+        <field name="partner_id"/>
+        <field name="project_id"/>
+        <field name="state" invisible="1"/>
+        <filter name="state_open" string="Đang giữ" domain="[('state','=','open')]"/>
+
+        <group expand="0" string="Nhóm theo">
+          <filter name="group_by_company" string="Công ty" context="{'group_by':'company_id'}"/>
+          <filter name="group_by_project" string="Dự án" context="{'group_by':'project_id'}"/>
+          <filter name="group_by_partner" string="Đối tác" context="{'group_by':'partner_id'}"/>
+          <filter name="group_by_release_date" string="Ngày nhả" context="{'group_by':'release_date'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <!-- ACTION Ledger: cập nhật view_mode + search_view + context mặc định -->
+  <record id="action_retention_ledger" model="ir.actions.act_window">
+    <field name="name">Sổ giữ lại (Phần công nợ giữ lại)</field>
+    <field name="res_model">openapp.retention.ledger</field>
+    <field name="view_mode">pivot,list,form</field>
+    <field name="search_view_id" ref="view_openapp_retention_ledger_search"/>
+    <field name="context">
+      {
+        "search_default_company_my": 1,
+        "search_default_group_by_project": 1
+      }
+    </field>
+  </record>
+
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Chỉ thấy bản ghi thuộc các công ty của user -->
+  <record id="rule_openapp_retention_company" model="ir.rule">
+    <field name="name">Retention Ledger: multi-company</field>
+    <field name="model_id" ref="model_openapp_retention_ledger"/>
+    <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>
+    <field name="global" eval="True"/>
+  </record>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- LIST -->
+  <record id="view_openapp_boq_list" model="ir.ui.view">
+    <field name="name">openapp.boq.list</field>
+    <field name="model">openapp.boq</field>
+    <field name="arch" type="xml">
+      <list string="Khối lượng dự toán (BoQ)" default_order="id desc">
+        <field name="name"/>
+        <field name="project_id"/>
+        <field name="partner_id"/>
+        <field name="state" widget="badge"/>
+        <field name="amount_total"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- FORM -->
+  <record id="view_openapp_boq_form" model="ir.ui.view">
+    <field name="name">openapp.boq.form</field>
+    <field name="model">openapp.boq</field>
+    <field name="arch" type="xml">
+      <form string="Khối lượng dự toán (BoQ)">
+        <header>
+          <button name="action_confirm" type="object" string="Xác nhận" class="btn-primary" invisible="state != 'draft'"/>
+          <button name="action_reset_to_draft" type="object" string="Về nháp" class="btn-secondary" invisible="state != 'confirmed'"/>
+          <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+        </header>
+
+        <sheet>
+          <group>
+            <field name="name" readonly="1"/>
+            <field name="project_id"/>
+            <field name="partner_id"/>
+            <field name="amount_total" readonly="1"/>
+          </group>
+
+          <notebook>
+            <page string="Dòng BoQ">
+              <field name="line_ids">
+                <list editable="bottom">
+                  <field name="sequence"/>
+                  <field name="name"/>
+                  <field name="product_id"/>
+                  <field name="uom_id" invisible="1"/>
+                  <field name="quantity"/>
+                  <field name="price_unit"/>
+                  <field name="total_price" readonly="1"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_openapp_boq" model="ir.actions.act_window">
+    <field name="name">Khối lượng dự toán (BoQ)</field>
+    <field name="res_model">openapp.boq</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+</odoo>

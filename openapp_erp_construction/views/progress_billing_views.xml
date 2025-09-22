@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- LIST -->
+  <record id="view_openapp_wc_list" model="ir.ui.view">
+    <field name="name">openapp.wc.list</field>
+    <field name="model">openapp.work.certificate</field>
+    <field name="arch" type="xml">
+      <list string="Chứng nhận khối lượng (WC)" default_order="date desc">
+        <field name="name"/>
+        <field name="project_id"/>
+        <field name="date"/>
+        <field name="amount_certified"/>
+        <field name="retention_amount"/>
+        <field name="state" widget="badge"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- FORM -->
+  <record id="view_openapp_wc_form" model="ir.ui.view">
+    <field name="name">openapp.wc.form</field>
+    <field name="model">openapp.work.certificate</field>
+    <field name="arch" type="xml">
+      <form string="Chứng nhận khối lượng (WC)">
+        <header>
+          <field name="state" widget="statusbar" statusbar_visible="draft,approved,invoiced"/>
+        </header>
+
+        <sheet>
+          <!-- SMART BUTTONS -->
+          <div class="oe_button_box" name="button_box">
+            <button name="action_view_invoices"
+                    type="object"
+                    class="oe_stat_button"
+                    title="Xem hóa đơn">
+              <i class="fa fa-file"/>   <!-- icon đơn giản, chắc chắn có -->
+              <span class="o_stat_text">Hóa đơn</span>
+              <!-- Nếu có field đếm (invoice_count) thì thêm:
+              <span class="o_stat_value"><field name="invoice_count"/></span>
+              -->
+            </button>
+          </div>
+
+          <group>
+            <field name="name" readonly="1"/>
+            <field name="project_id"/>
+            <field name="date"/>
+            <field name="amount_certified"/>
+            <field name="retention_percent"/>
+            <field name="retention_amount" readonly="1"/>
+          </group>
+
+          <group string="Liên kết">
+            <field name="invoice_ids" widget="many2many_tags"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_openapp_wc" model="ir.actions.act_window">
+    <field name="name">Chứng nhận khối lượng (WC)</field>
+    <field name="res_model">openapp.work.certificate</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+
+    <!-- Root app (nếu đã có, record này chỉ update lại name/sequence) -->
+    <menuitem id="menu_openapp_construction_root"
+              name="Thi công"
+              sequence="10"/>
+
+    <!-- Nhóm menu Báo cáo Thi công -->
+    <menuitem id="menu_openapp_construction_reports"
+              name="Báo cáo Thi công"
+              parent="menu_openapp_construction_root"
+              sequence="90"/>
+
+    <!-- Báo cáo: Chi phí công trình (phải tồn tại action_openapp_job_costing) -->
+    <menuitem id="menu_openapp_report_job_costing"
+              name="Chi phí công trình"
+              parent="menu_openapp_construction_reports"
+              action="openapp_erp_construction.action_openapp_job_costing"
+              sequence="10"/>
+
+    <!-- Báo cáo: Tiêu thụ vật tư (phải tồn tại action_openapp_material_consumption) -->
+    <menuitem id="menu_openapp_report_material_consumption"
+              name="Tiêu thụ vật tư"
+              parent="menu_openapp_construction_reports"
+              action="openapp_erp_construction.action_openapp_material_consumption"
+              sequence="20"/>
+
+    <!--
+<menuitem id="menu_openapp_construction_dashboard_child"
+          name="Tổng quan"
+          parent="menu_openapp_construction_reports"
+          action="action_openapp_construction_dashboard"
+          sequence="1"/>
+-->
+
+
+  </data>
+</odoo>

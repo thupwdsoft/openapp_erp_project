@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*-
+{
+    "name": "OpenApp ERP Construction",
+    "version": "18.0.3.0.7",  # <-- bump
+    "summary": "BoQ, MR, Thầu phụ, Chứng nhận KL, VO, QA/QC, Retention, Timesheet công trường",
+    "author": "OpenApp",
+    "depends": [
+        "account",
+        "uom",
+        "contacts",
+        "sale",
+        "hr",
+        "hr_holidays",
+        "hr_contract",
+    ],
+    "data": [
+        "security/ir.model.access.csv",
+        "security/openapp_retention_rules.xml", 
+        "data/sequence.xml",
+        "data/retention_cron.xml",
+        "views/boq_views.xml",
+        "views/job_costing_views.xml",
+        "views/material_request_views.xml",
+        "views/material_consumption_views.xml",
+        "views/construction_report_menus.xml",
+        "views/subcontract_views.xml",
+        "views/progress_billing_views.xml",
+        "views/variation_order_views.xml",
+        "views/qa_qc_views.xml",
+        "views/res_project_views.xml",
+        "views/res_project_task_views.xml",
+        "views/retention_views.xml",
+        "views/res_config_settings.xml",
+        "views/site_timesheet_views.xml",
+        "reports/report_retention_ledger_templates.xml",
+        "reports/report_retention_ledger_action.xml",
+        "views/site_dashboard_views.xml",
+        "views/dashboard_views.xml",
+        "views/menu.xml",
+    ],
+    "assets": {
+        "web.assets_backend": [
+            "openapp_erp_construction/static/src/css/custom_theme.css",
+            #"openapp_erp_construction/static/src/css/header_icons.css",
+            "openapp_erp_construction/static/src/css/menu_icons.css",
+        ],
+         'web.assets_frontend': [
+            'openapp_erp_men/static/src/css/custom_footer.css',
+        ],
+    },
+    "installable": True,
+    "application": True,
+}

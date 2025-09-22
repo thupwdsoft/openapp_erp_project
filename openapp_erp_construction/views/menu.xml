@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- Root app -->
+    <menuitem id="menu_openapp_construction_root"
+              name="Thi công"
+              sequence="10"/>
+
+    <!-- Level 1 groups -->
+    <menuitem id="menu_openapp_construction_ops"
+              name="Nghiệp vụ"
+              parent="menu_openapp_construction_root"
+              sequence="10"/>
+
+    <menuitem id="menu_openapp_construction_qaqc"
+              name="Kiểm soát chất lượng (QA/QC)"
+              parent="menu_openapp_construction_root"
+              sequence="20"/>
+
+    <!-- Nghiệp vụ -->
+    <menuitem id="menu_openapp_boq"
+              name="Khối lượng dự toán (BoQ)"
+              parent="menu_openapp_construction_ops"
+              action="openapp_erp_construction.action_openapp_boq"
+              sequence="10"/>
+
+    <menuitem id="menu_openapp_mr"
+              name="Yêu cầu vật tư (MR)"
+              parent="menu_openapp_construction_ops"
+              action="openapp_erp_construction.action_openapp_mr"
+              sequence="20"/>
+
+    <menuitem id="menu_openapp_subcontract"
+              name="Hợp đồng thầu phụ"
+              parent="menu_openapp_construction_ops"
+              action="openapp_erp_construction.action_openapp_subcontract"
+              sequence="30"/>
+
+    <!--<menuitem id="menu_openapp_progress_billing"
+              name="Chứng nhận khối lượng (WC)"
+              parent="menu_openapp_construction_ops"
+              action="openapp_erp_construction.action_openapp_wc"
+              sequence="40"/>
+
+    <menuitem id="menu_openapp_vo"
+              name="Lệnh thay đổi (VO)"
+              parent="menu_openapp_construction_ops"
+              action="openapp_erp_construction.action_openapp_vo"
+              sequence="50"/>-->
+
+    <!-- Nhân lực hiện trường (group con trong Nghiệp vụ) -->
+    <menuitem id="menu_openapp_site_ts_group"
+              name="Nhân lực hiện trường"
+              parent="menu_openapp_construction_ops"
+              sequence="60"/>
+
+    <menuitem id="menu_openapp_site_ts_action"
+              name="Chấm công công trường"
+              parent="menu_openapp_site_ts_group"
+              action="openapp_erp_construction.action_site_timesheet"
+              sequence="10"/>
+
+    <!-- QA/QC -->
+    <menuitem id="menu_openapp_rfi"
+              name="Yêu cầu thông tin (RFI)"
+              parent="menu_openapp_construction_qaqc"
+              action="openapp_erp_construction.action_openapp_rfi"
+              sequence="10"/>
+
+    <menuitem id="menu_openapp_ncr"
+              name="Biên bản không phù hợp (NCR)"
+              parent="menu_openapp_construction_qaqc"
+              action="openapp_erp_construction.action_openapp_ncr"
+              sequence="20"/>
+
+    <menuitem id="menu_openapp_itp"
+              name="Kế hoạch kiểm tra &amp; thử nghiệm (ITP)"
+              parent="menu_openapp_construction_qaqc"
+              action="openapp_erp_construction.action_openapp_itp"
+              sequence="30"/>
+
+  </data>
+</odoo>

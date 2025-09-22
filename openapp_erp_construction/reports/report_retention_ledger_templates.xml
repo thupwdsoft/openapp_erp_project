@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_retention_ledger_document">
+    <t t-call="web.external_layout">
+      <t t-set="doc_ids" t-value="docs.ids"/>
+      <t t-set="doc_model" t-value="'openapp.retention.ledger'"/>
+
+      <div class="page">
+        <h2 style="margin-bottom:8px">Sổ giữ lại (Retention)</h2>
+
+        <p t-if="data.get('date_from') or data.get('date_to')" class="text-muted" style="margin-top:0">
+          <t t-if="data.get('date_from')">
+            Từ: <t t-esc="data.get('date_from')"/>
+          </t>
+          <t t-if="data.get('date_to')">
+            <span class="mx-1"></span>Đến: <t t-esc="data.get('date_to')"/>
+          </t>
+        </p>
+
+        <p t-if="data.get('project_id')" class="text-muted" style="margin-top:0">
+          Dự án:
+          <t t-esc="env['project.project'].browse(int(data.get('project_id'))).display_name"/>
+        </p>
+        <p t-if="data.get('partner_id')" class="text-muted" style="margin-top:0">
+          Đối tác:
+          <t t-esc="env['res.partner'].browse(int(data.get('partner_id'))).display_name"/>
+        </p>
+
+        <table class="table table-sm o_main_table" style="width:100%; margin-top:12px">
+          <thead>
+            <tr>
+              <th style="width:18%">Ngày dự kiến nhả</th>
+              <th style="width:18%">Chứng từ gốc</th>
+              <th style="width:18%">Đối tác</th>
+              <th style="width:20%">Dự án</th>
+              <th class="text-end" style="width:13%">Giá trị gốc</th>
+              <th class="text-end" style="width:13%">Giữ lại</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-foreach="docs" t-as="l">
+              <tr>
+                <td><span t-esc="l.release_date"/></td>
+                <td><span t-esc="l.move_id.display_name"/></td>
+                <td><span t-esc="l.partner_id.display_name"/></td>
+                <td><span t-esc="l.project_id.display_name or ''"/></td>
+                <td class="text-end"><span t-esc="format_amount(l.amount_base, l.currency_id)"/></td>
+                <td class="text-end"><span t-esc="format_amount(l.amount, l.currency_id)"/></td>
+              </tr>
+            </t>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="4" class="text-end">Tổng</th>
+              <th class="text-end">
+                <t t-esc="format_amount(sum(docs.mapped('amount_base')), docs and docs[0].currency_id)"/>
+              </th>
+              <th class="text-end">
+                <t t-esc="format_amount(sum(docs.mapped('amount')), docs and docs[0].currency_id)"/>
+              </th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </t>
+  </template>
+</odoo>

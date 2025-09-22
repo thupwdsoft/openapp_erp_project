@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_site_ts_list" model="ir.ui.view">
+    <field name="name">openapp.site.ts.list</field>
+    <field name="model">openapp.site.timesheet</field>
+    <field name="arch" type="xml">
+      <list string="Chấm công công trường" default_order="date desc">
+        <field name="name"/>
+        <field name="employee_id"/>
+        <field name="project_id"/>
+        <field name="task_id"/>
+        <field name="date"/>
+        <field name="hours"/>
+        <field name="amount"/>
+        <field name="state" widget="badge"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_site_ts_form" model="ir.ui.view">
+    <field name="name">openapp.site.ts.form</field>
+    <field name="model">openapp.site.timesheet</field>
+    <field name="arch" type="xml">
+      <form string="Chấm công công trường">
+        <header>
+          <button name="action_confirm" type="object" string="Xác nhận" class="btn-primary" invisible="state != 'draft'"/>
+          <button name="action_open_analytic" type="object" string="Xem bút toán" class="btn-secondary" invisible="not analytic_line_id"/>
+          <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+        </header>
+        <sheet>
+          <group>
+            <field name="name" readonly="1"/>
+            <field name="employee_id"/>
+            <field name="project_id"/>
+            <field name="task_id"/>
+            <field name="date"/>
+          </group>
+          <group>
+            <field name="hours"/>
+            <field name="cost_rate"/>
+            <field name="amount" readonly="1"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_site_timesheet" model="ir.actions.act_window">
+    <field name="name">Chấm công công trường</field>
+    <field name="res_model">openapp.site.timesheet</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

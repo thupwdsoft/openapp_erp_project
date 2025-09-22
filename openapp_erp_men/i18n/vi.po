@@ -1,0 +1,84 @@
+# Vietnamese translations for OpenApp Warranty overrides
+# Copyright (C)
+# This file is distributed under the same license as the module.
+msgid ""
+msgstr ""
+"Project-Id-Version: openapp_warranty 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-04 00:00+0000\n"
+"PO-Revision-Date: 2025-09-04 00:00+0000\n"
+"Last-Translator: OpenApp\n"
+"Language-Team: Vietnamese\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# ---------------------------
+# Sales
+# ---------------------------
+#. module: base
+#: model:ir.module.category,name:base.module_category_sales_management
+msgid "Sales"
+msgstr "Bán hàng"
+
+#. module: sales_team
+#: model:ir.module.category,name:sales_team.module_category_sales
+msgid "Sales"
+msgstr "Bán hàng"
+
+#. module: sale_management
+#: model:ir.module.category,name:sale_management.module_category_sales
+msgid "Sales"
+msgstr "Bán hàng"
+
+# ---------------------------
+# Accounting
+# ---------------------------
+#. module: base
+#: model:ir.module.category,name:base.module_category_accounting
+msgid "Accounting"
+msgstr "Kế toán"
+
+#. module: account
+#: model:ir.module.category,name:account.module_category_accounting
+msgid "Accounting"
+msgstr "Kế toán"
+
+# ---------------------------
+# Inventory
+# ---------------------------
+#. module: stock
+#: model:ir.module.category,name:stock.module_category_inventory
+msgid "Inventory"
+msgstr "Kho vận"
+
+#. module: base
+#: model:ir.module.category,name:base.module_category_inventory
+msgid "Inventory"
+msgstr "Kho vận"
+
+# ---------------------------
+# Productivity
+# ---------------------------
+#. module: base
+#: model:ir.module.category,name:base.module_category_productivity
+msgid "Productivity"
+msgstr "Năng suất"
+
+# ---------------------------
+# Other
+# ---------------------------
+#. module: base
+#: model:ir.module.category,name:base.module_category_other
+msgid "Other"
+msgstr "Khác"
+
+# ---------------------------
+# Administration
+# ---------------------------
+#. module: base
+#: model:ir.module.category,name:base.module_category_administration
+msgid "Administration"
+msgstr "Quản trị hệ thống"
