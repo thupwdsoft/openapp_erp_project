@@ -9,6 +9,7 @@ class ProjectProject(models.Model):
         string="Tài khoản phân tích",
         ondelete="set null",
         index=True,
+        check_company=True,   # giữ nhất quán công ty
     )
 
     design_document_ids = fields.Many2many(
@@ -33,9 +34,12 @@ class ProjectProject(models.Model):
         projects = super().create(vals_list)
         for p in projects:
             if not p.analytic_account_id:
-                aa = self.env["account.analytic.account"].create({
+                # chọn company hợp lý, fallback về công ty hiện tại nếu cần
+                company = p.company_id or self.env.company
+                # tạo analytic account với đúng company & quyền
+                aa = self.env["account.analytic.account"].with_company(company).sudo().create({
                     "name": p.name or _("Project %s") % p.id,
-                    "company_id": p.company_id.id,
+                    "company_id": company.id,
                 })
                 p.analytic_account_id = aa.id
         return projects
@@ -44,8 +48,9 @@ class ProjectProject(models.Model):
         res = super().write(vals)
         if "name" in vals:
             for p in self.filtered('analytic_account_id'):
+                # cập nhật tên analytic theo tên project; bỏ lỗi im lặng nếu bị giới hạn quyền
                 try:
-                    p.analytic_account_id.name = p.name
+                    p.analytic_account_id.sudo().name = p.name
                 except Exception:
                     pass
         return res
