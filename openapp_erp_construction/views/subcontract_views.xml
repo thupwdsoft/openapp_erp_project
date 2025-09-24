@@ -77,5 +77,8 @@
     <field name="name">Hợp đồng thầu phụ</field>
     <field name="res_model">openapp.subcontract</field>
     <field name="view_mode">list,form</field>
+    <!-- GHI ĐÈ m2m groups_id để user thường có quyền -->
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
   </record>
+
 </odoo>
