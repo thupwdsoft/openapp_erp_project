@@ -52,9 +52,6 @@
             #"openapp_erp_construction/static/src/css/header_icons.css",
             "openapp_erp_construction/static/src/css/menu_icons.css",
         ],
-         'web.assets_frontend': [
-            'openapp_erp_men/static/src/css/custom_footer.css',
-        ],
     },
     "installable": True,
     "application": True,
