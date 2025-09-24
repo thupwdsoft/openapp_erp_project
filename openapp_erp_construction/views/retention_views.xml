@@ -61,7 +61,7 @@
     <field name="arch" type="xml">
       <form string="Sổ giữ lại">
         <header>
-          <button name="action_release_retention" type="object" string="Trả nốt công nợ giữa lại"
+          <button name="action_release_retention" type="object" string="Trả công nợ giữa lại"
                   class="btn-primary" invisible="state != 'open'"/>
           <field name="state" widget="statusbar" statusbar_visible="open,released,cancel"/>
         </header>

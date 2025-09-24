@@ -20,8 +20,33 @@
     <field name="arch" type="xml">
       <form string="Hợp đồng thầu phụ">
         <header>
-          <field name="state" widget="statusbar" statusbar_visible="draft,running,done"/>
+          <!-- Statusbar -->
+          <field name="state"
+                widget="statusbar"
+                statusbar_visible="draft,running,done"
+                statusbar_colors='{"draft":"blue","running":"green","done":"green"}'/>
+
+          <!-- Bắt đầu: chỉ hiện ở draft -->
+          <button name="action_start"
+                  type="object"
+                  string="Bắt đầu"
+                  class="oe_highlight"
+                  modifiers="{'invisible': [('state','!=','draft')]}"/>
+
+          <!-- Hoàn tất: chỉ hiện ở running -->
+          <button name="action_done"
+                  type="object"
+                  string="Hoàn tất"
+                  class="oe_highlight"
+                  modifiers="{'invisible': [('state','!=','running')]}"/>
+
+          <!-- Đưa về nháp: chỉ hiện ở done -->
+          <button name="action_reset_to_draft"
+                  type="object"
+                  string="Đưa về nháp"
+                  modifiers="{'invisible': [('state','!=','done')]}"/>
         </header>
+
         <sheet>
 
           <!-- SMART BUTTON -->

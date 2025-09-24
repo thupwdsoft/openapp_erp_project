@@ -78,7 +78,6 @@
               name="Kế hoạch kiểm tra &amp; thử nghiệm (ITP)"
               parent="menu_openapp_construction_qaqc"
               action="openapp_erp_construction.action_openapp_itp"
-              sequence="30"/>
-
+              sequence="30"/>  
   </data>
 </odoo>

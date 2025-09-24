@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- SEARCH -->
+  <record id="view_res_partner_search_subcontractor" model="ir.ui.view">
+    <field name="name">res.partner.search.subcontractor</field>
+    <field name="model">res.partner</field>
+    <field name="arch" type="xml">
+      <search string="Tìm Nhà thầu phụ">
+        <field name="name"/>
+        <field name="phone"/>
+        <field name="email"/>
+        <filter name="flt_is_subcontractor" string="Chỉ Nhà thầu phụ" domain="[('is_subcontractor','=',True)]"/>
+        <group string="Nhóm theo">
+          <filter name="gb_country" string="Quốc gia" context="{'group_by':'country_id'}"/>
+          <filter name="gb_state"   string="Tỉnh/TP"  context="{'group_by':'state_id'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <!-- ACTION -->
+  <record id="action_res_partner_subcontractor" model="ir.actions.act_window">
+    <field name="name">Nhà thầu phụ</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">list,form</field>
+    <field name="domain">[('is_subcontractor','=',True)]</field>
+    <field name="context">{'default_is_subcontractor': True, 'default_is_company': True}</field>
+    <field name="search_view_id" ref="view_res_partner_search_subcontractor"/>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">Tạo nhà thầu phụ mới</p>
+      <p>Form rút gọn chỉ chứa thông tin chính phục vụ quản lý thầu phụ.</p>
+    </field>
+  </record>
+
+  <!-- LIST -->
+  <record id="view_res_partner_list_subcontractor" model="ir.ui.view">
+    <field name="name">res.partner.list.subcontractor</field>
+    <field name="model">res.partner</field>
+    <field name="arch" type="xml">
+      <list string="Nhà thầu phụ" create="1" delete="1">
+        <field name="name"/>
+        <field name="phone"/>
+        <field name="mobile"/>
+        <field name="email"/>
+        <field name="vat"/>
+        <field name="city"/>
+        <field name="country_id"/>
+        <field name="subcontract_count" widget="statinfo"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Map LIST vào ACTION -->
+  <record id="action_res_partner_subcontractor_view_list" model="ir.actions.act_window.view">
+    <field name="sequence">1</field>
+    <field name="view_mode">list</field>
+    <field name="view_id" ref="view_res_partner_list_subcontractor"/>
+    <field name="act_window_id" ref="action_res_partner_subcontractor"/>
+  </record>
+
+  <!-- FORM tối giản (KHÔNG kế thừa) -->
+  <record id="view_res_partner_form_subcontractor_minimal" model="ir.ui.view">
+    <field name="name">res.partner.form.subcontractor.minimal</field>
+    <field name="model">res.partner</field>
+    <field name="priority">50</field>
+    <field name="arch" type="xml">
+      <form string="Nhà thầu phụ">
+        <sheet>
+          <!-- SMART BUTTONS (đặt đầu sheet) -->
+          <div class="o_button_box" name="button_box">
+            <button type="object"
+                    name="action_view_subcontracts"
+                    class="oe_stat_button"
+                    icon="fa-plus-square"
+                    modifiers="{'invisible': ['|', ('is_subcontractor','=',False), ('id','=',False)]}">
+              <!-- field phải nằm BÊN TRONG button -->
+              <field name="subcontract_count" widget="statinfo" string="Hợp đồng thầu phụ"/>
+            </button>
+          </div>
+
+          <!-- PHẦN NỘI DUNG FORM -->
+          <group string="Thông tin chính">
+            <group>
+              <field name="name" required="1"/>
+              <field name="is_subcontractor" modifiers="{'invisible': true}" readonly="1"/>
+              <field name="vat"/>
+              <field name="phone"/>
+              <field name="mobile"/>
+              <field name="email"/>
+              <field name="website"/>
+            </group>
+            <group string="Địa chỉ">
+              <label for="street"/>
+              <div class="o_address_format">
+                <field name="street"/>
+                <field name="city"/>
+                <field name="state_id" context="{'country_id': country_id}" options="{'no_open': True, 'no_quick_create': True}"/>
+                <field name="zip"/>
+                <field name="country_id" options="{'no_open': True, 'no_create': True}"/>
+              </div>
+            </group>
+          </group>
+
+          <group string="Ghi chú" colspan="2">
+            <field name="comment" placeholder="Ghi chú nội bộ..."/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Map FORM vào ACTION -->
+  <record id="action_res_partner_subcontractor_view_form" model="ir.actions.act_window.view">
+    <field name="sequence">2</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_res_partner_form_subcontractor_minimal"/>
+    <field name="act_window_id" ref="action_res_partner_subcontractor"/>
+  </record>
+
+  <!-- SERVER ACTION -->
+  <record id="server_action_mark_as_subcontractor" model="ir.actions.server">
+    <field name="name">Đặt là Nhà thầu phụ</field>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="binding_model_id" ref="base.model_res_partner"/>
+    <field name="state">code</field>
+    <field name="code">records.write({'is_subcontractor': True})</field>
+  </record>
+
+  <!-- MENU -->
+  <menuitem id="menu_openapp_subcontractors"
+            name="Nhà thầu phụ"
+            parent="menu_openapp_construction_ops"
+            action="openapp_erp_construction.action_res_partner_subcontractor"
+            sequence="25"/>
+
+</odoo>

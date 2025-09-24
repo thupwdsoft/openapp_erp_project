@@ -2,6 +2,7 @@ from . import boq
 from . import inherit_stock
 from . import material_request
 from . import material_consumption
+from . import res_partner_subcontractor
 from . import subcontract
 from . import progress_billing
 #from . import variation_order

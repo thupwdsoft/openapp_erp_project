@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "OpenApp ERP Construction",
-    "version": "18.0.3.0.7",  # <-- bump
+    "version": "18.0.3.0.9",  # <-- bump
     "summary": "BoQ, MR, Thầu phụ, Chứng nhận KL, VO, QA/QC, Retention, Timesheet công trường",
     "author": "OpenApp",
     "depends": [
@@ -18,25 +18,31 @@
         "security/openapp_retention_rules.xml", 
         "data/sequence.xml",
         "data/retention_cron.xml",
+
+        "views/menu.xml",
+        
         "views/boq_views.xml",
         "views/job_costing_views.xml",
         "views/material_request_views.xml",
         "views/material_consumption_views.xml",
         "views/construction_report_menus.xml",
+        "views/res_partner_subcontractor_views.xml",
         "views/subcontract_views.xml",
         "views/progress_billing_views.xml",
-        "views/variation_order_views.xml",
+        #"views/variation_order_views.xml",
         "views/qa_qc_views.xml",
         "views/res_project_views.xml",
         "views/res_project_task_views.xml",
         "views/retention_views.xml",
         "views/res_config_settings.xml",
         "views/site_timesheet_views.xml",
+
         "reports/report_retention_ledger_templates.xml",
-        "reports/report_retention_ledger_action.xml",
+        "reports/report_retention_ledger_action.xml",        
+        "reports/report_boq_quotation_templates.xml",    
+
         "views/site_dashboard_views.xml",
-        "views/dashboard_views.xml",
-        "views/menu.xml",
+        "views/dashboard_views.xml",        
     ],
     "assets": {
         "web.assets_backend": [

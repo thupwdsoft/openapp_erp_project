@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_boq_quotation_tmpl">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+        <t t-set="company" t-value="o.company_id or env.company"/>
+        <t t-call="web.external_layout">
+          <div class="page">
+            <h2 style="margin:0 0 8px 0;">BÁO GIÁ / KHỐI LƯỢNG DỰ TOÁN</h2>
+
+            <p style="margin:0 0 2px 0;">
+              <b>Số BoQ:</b> <t t-esc="o.name"/>
+              <span class="sep"> | </span>
+              <b>Ngày:</b>
+              <t t-set="dt" t-value="(o.create_date or o.write_date)"/>
+              <t t-esc="dt and dt.date().strftime('%d/%m/%Y') or ''"/>
+            </p>
+
+            <p style="margin:0 0 10px 0;">
+              <b>Khách hàng:</b> <t t-esc="o.partner_id.display_name or ''"/>
+              <t t-if="o.project_id">
+                <span class="sep"> | </span>
+                <b>Dự án:</b> <t t-esc="o.project_id.display_name"/>
+              </t>
+            </p>
+
+            <t t-set="currency" t-value="o.currency_id or company.currency_id"/>
+
+            <style>
+              .oa-boq {width:100%; border-collapse:collapse; font-size:12px;}
+              .oa-boq th {border-bottom:1px solid #ccc; padding:6px 6px; text-align:left;}
+              .oa-boq td {border-top:1px solid #eee; padding:6px 6px; vertical-align:top;}
+              .oa-num {text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums;}
+              .oa-center {text-align:center;}
+              .oa-subtle {color:#666;}
+              .oa-total {font-weight:600; border-top:1px solid #ccc;}
+              .sep {display:inline-block; padding:0 6px;}
+            </style>
+
+            <table class="oa-boq">
+              <thead>
+                <tr>
+                  <th style="width:34px;">STT</th>
+                  <th>Nhóm</th>
+                  <th>Diễn giải</th>
+                  <th style="width:70px;">ĐVT</th>
+                  <th class="oa-num" style="width:90px;">Khối lượng</th>
+                  <th class="oa-num" style="width:100px;">Diện tích (m²)</th>
+                  <th class="oa-num" style="width:110px;">Đơn giá</th>
+                  <th class="oa-num" style="width:120px;">Thành tiền</th>
+                </tr>
+              </thead>
+              <tbody>
+                <t t-set="i" t-value="0"/>
+                <t t-foreach="o.line_ids.filtered(lambda l: l.include_in_print)" t-as="line">
+                  <t t-set="i" t-value="i + 1"/>
+                  <tr>
+                    <td class="oa-center"><t t-esc="i"/></td>
+                    <td><t t-esc="line.group_name or ''"/></td>
+                    <td>
+                      <div><t t-esc="line.name or (line.product_id and line.product_id.display_name) or ''"/></div>
+                      <div class="oa-subtle">
+                        <t t-if="line.line_type == 'package'">[Gói]</t>
+                        <t t-if="line.line_type == 'design'">[Thiết kế]</t>
+                        <t t-if="line.line_type == 'labor'">[Nhân công]</t>
+                        <t t-if="line.line_type == 'allowance'">[Tạm tính]</t>
+                        <t t-if="line.calc_method == 'lump'"> [Trọn gói]</t>
+                        <t t-if="line.calc_method == 'area'"> [Theo m²]</t>
+                        <t t-if="line.calc_method == 'qty'"> [Theo khối lượng]</t>
+                      </div>
+                    </td>
+                    <td><t t-esc="(line.uom_id and line.uom_id.name) or ''"/></td>
+                    <!-- Khối lượng -->
+                    <td class="oa-num">
+                      <t t-if="line.calc_method == 'qty'">
+                        <t t-set="q" t-value="line.quantity or 0.0"/>
+                        <t t-esc="('%.2f' % q).rstrip('0').rstrip('.')"/>
+                      </t>
+                    </td>
+                    <!-- Diện tích -->
+                    <td class="oa-num">
+                      <t t-if="line.calc_method == 'area'">
+                        <t t-set="a" t-value="line.area_ref or 0.0"/>
+                        <t t-esc="('%.2f' % a).rstrip('0').rstrip('.')"/>
+                      </t>
+                    </td>
+                    <!-- Đơn giá -->
+                    <td class="oa-num">
+                      <t t-set="pu" t-value="float(line.price_unit or 0.0)"/>
+                      <t t-esc="('{:,.0f}'.format(pu)).replace(',', '.')"/>
+                    </td>
+                    <!-- Thành tiền -->
+                    <td class="oa-num">
+                      <t t-set="tt" t-value="float(line.total_price or 0.0)"/>
+                      <t t-esc="('{:,.0f}'.format(tt)).replace(',', '.')"/>
+                    </td>
+                  </tr>
+                </t>
+                <tr class="oa-total">
+                  <td colspan="7" class="oa-num">TỔNG CỘNG</td>
+                  <td class="oa-num">
+                    <t t-set="sumv" t-value="float(o.amount_total or 0.0)"/>
+                    <t t-esc="('{:,.0f}'.format(sumv)).replace(',', '.')"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="margin-top:14px;">
+              <div class="oa-subtle">
+                <i>Lưu ý: Giá trên chưa bao gồm VAT (nếu áp dụng), chưa bao gồm các hạng mục ngoài phạm vi BoQ.</i>
+              </div>
+            </div>
+
+          </div>
+        </t>
+      </t>
+    </t>
+  </template>
+
+  <!-- ACTION REPORT -->
+  <record id="action_report_boq_quotation" model="ir.actions.report">
+    <field name="name">In Báo giá BoQ</field>
+    <field name="model">openapp.boq</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">openapp_erp_construction.report_boq_quotation_tmpl</field>
+    <field name="report_file">openapp_erp_construction.report_boq_quotation_tmpl</field>
+    <field name="print_report_name">'Bao_gia_BoQ_%s' % (object.name or '')</field>
+    <field name="binding_model_id" ref="model_openapp_boq"/>
+    <field name="binding_type">report</field>
+  </record>
+</odoo>

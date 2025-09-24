@@ -30,12 +30,12 @@
       <field name="padding">4</field>
     </record>
 
-    <record id="seq_openapp_vo" model="ir.sequence">
+    <!--<record id="seq_openapp_vo" model="ir.sequence">
       <field name="name">Variation Order</field>
       <field name="code">openapp.vo</field>
       <field name="prefix">VO%(y)s%(month)s-</field>
       <field name="padding">4</field>
-    </record>
+    </record>-->
 
     <record id="seq_openapp_rfi" model="ir.sequence">
       <field name="name">RFI</field>

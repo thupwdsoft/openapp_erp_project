@@ -5,7 +5,6 @@ access_openapp_mr_user,access_openapp_mr_user,model_openapp_material_request,bas
 access_openapp_mr_line_user,access_openapp_mr_line_user,model_openapp_material_request_line,base.group_user,1,1,1,1
 access_openapp_subcontract_user,access_openapp_subcontract_user,model_openapp_subcontract,base.group_user,1,1,1,1
 access_openapp_wc_user,access_openapp_wc_user,model_openapp_work_certificate,base.group_user,1,1,1,1
-access_openapp_vo_user,access_openapp_vo_user,model_openapp_variation_order,base.group_user,1,1,1,1
 access_openapp_rfi_user,access_openapp_rfi_user,model_openapp_rfi,base.group_user,1,1,1,1
 access_openapp_ncr_user,access_openapp_ncr_user,model_openapp_ncr,base.group_user,1,1,1,1
 access_openapp_itp_user,access_openapp_itp_user,model_openapp_itp,base.group_user,1,1,1,1

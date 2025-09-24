@@ -23,7 +23,11 @@
     <field name="arch" type="xml">
       <form string="Khối lượng dự toán (BoQ)">
         <header>
-          <button name="action_confirm" type="object" string="Xác nhận" class="btn-primary" invisible="state != 'draft'"/>
+          <button name="action_create_sale_order" type="object" string="Tạo báo giá" class="btn-primary" invisible="sale_order_id"/>
+          <button name="action_open_sale_order" type="object" string="Mở báo giá" invisible="not sale_order_id"/>
+          <button name="action_print_quotation" type="object" string="In báo giá" class="btn-secondary"/>
+
+          <button name="action_confirm" type="object" string="Xác nhận" class="btn-secondary" invisible="state != 'draft'"/>
           <button name="action_reset_to_draft" type="object" string="Về nháp" class="btn-secondary" invisible="state != 'confirmed'"/>
           <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
         </header>
@@ -33,20 +37,29 @@
             <field name="name" readonly="1"/>
             <field name="project_id"/>
             <field name="partner_id"/>
+            <field name="pricelist_id"/>
+            <field name="sale_order_id" readonly="1"/>
             <field name="amount_total" readonly="1"/>
           </group>
 
           <notebook>
             <page string="Dòng BoQ">
-              <field name="line_ids">
+              <field name="line_ids" context="{'default_quantity': 1.0}">
                 <list editable="bottom">
-                  <field name="sequence"/>
-                  <field name="name"/>
-                  <field name="product_id"/>
-                  <field name="uom_id" invisible="1"/>
-                  <field name="quantity"/>
-                  <field name="price_unit"/>
-                  <field name="total_price" readonly="1"/>
+                  <field name="sequence" string="STT" width="70"/>
+                  <field name="group_name" string="Nhóm"/>
+                  <field name="line_type" string="Loại"/>
+                  <field name="name" string="Diễn giải"/>
+                  <field name="product_id" string="Vật tư/Công việc"/>
+                  <field name="uom_id" string="ĐVT" domain="[('category_id','=',product_uom_category_id)]"/>
+                  <field name="calc_method" string="Cách tính"/>
+                  <!-- MỘT CỘT NHẬP DUY NHẤT -->
+                  <field name="measure_value" string="Số đo"/>
+                  <field name="measure_label" string="ĐVT đo" readonly="1"/>
+                  <!-- Giá & tổng -->
+                  <field name="price_unit" string="Đơn giá"/>
+                  <field name="total_price" string="Thành tiền" readonly="1"/>
+                  <field name="include_in_print" string="In?"/>
                 </list>
               </field>
             </page>

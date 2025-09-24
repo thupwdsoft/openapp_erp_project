@@ -8,6 +8,7 @@
         "base",         # nền tảng
         "web",          # để nạp assets
         "mail",
+        "account",
         "mass_mailing",      
         "product",      # nút Quick Sale trên product.template
         "sale",         # các view sale.order/*
@@ -15,7 +16,7 @@
         "sale_stock",
         "project",
         "mrp",
-        "hr_expense",
+        #"hr_expense",
         "purchase",
         "calendar",
     ],

@@ -22,7 +22,6 @@
             <button string="Material Requests" type="action" name="%(openapp_erp_construction.action_openapp_mr)d" class="oe_link"/>
             <button string="Subcontracts" type="action" name="%(openapp_erp_construction.action_openapp_subcontract)d" class="oe_link"/>
             <button string="Work Certificates" type="action" name="%(openapp_erp_construction.action_openapp_wc)d" class="oe_link"/>
-            <button string="Variation Orders" type="action" name="%(openapp_erp_construction.action_openapp_vo)d" class="oe_link"/>
             <button string="Material Consumption" type="action" name="%(openapp_erp_construction.action_openapp_material_consumption)d" class="oe_link"/>
             <button string="Job Costing" type="action" name="%(openapp_erp_construction.action_openapp_job_costing)d" class="oe_link"/>
           </group>
