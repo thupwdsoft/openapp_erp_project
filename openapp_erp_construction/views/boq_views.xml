@@ -23,12 +23,20 @@
     <field name="arch" type="xml">
       <form string="Khối lượng dự toán (BoQ)">
         <header>
-          <button name="action_create_sale_order" type="object" string="Tạo báo giá" class="btn-primary" invisible="sale_order_id"/>
-          <button name="action_open_sale_order" type="object" string="Mở báo giá" invisible="not sale_order_id"/>
-          <button name="action_print_quotation" type="object" string="In báo giá" class="btn-secondary"/>
+          <!-- SO buttons -->
+          <button name="action_create_sale_order" type="object" string="Tạo báo giá"
+                  class="oe_highlight" invisible="sale_order_id"/>
+          <button name="action_open_sale_order" type="object" string="Mở báo giá"
+                  invisible="not sale_order_id"/>
+          <button name="action_print_quotation" type="object" string="In báo giá"
+                  invisible="not sale_order_id"/>
 
-          <button name="action_confirm" type="object" string="Xác nhận" class="btn-secondary" invisible="state != 'draft'"/>
-          <button name="action_reset_to_draft" type="object" string="Về nháp" class="btn-secondary" invisible="state != 'confirmed'"/>
+          <!-- State buttons -->
+          <button name="action_confirm" type="object" string="Xác nhận"
+                  class="oe_highlight" invisible="state != 'draft'"/>
+          <button name="action_reset_to_draft" type="object" string="Về nháp"
+                  invisible="state != 'confirmed'"/>
+
           <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
         </header>
 
@@ -53,10 +61,10 @@
                   <field name="product_id" string="Vật tư/Công việc"/>
                   <field name="uom_id" string="ĐVT" domain="[('category_id','=',product_uom_category_id)]"/>
                   <field name="calc_method" string="Cách tính"/>
-                  <!-- MỘT CỘT NHẬP DUY NHẤT -->
+                  <!-- nhập duy nhất -->
                   <field name="measure_value" string="Số đo"/>
                   <field name="measure_label" string="ĐVT đo" readonly="1"/>
-                  <!-- Giá & tổng -->
+                  <!-- giá & tổng -->
                   <field name="price_unit" string="Đơn giá"/>
                   <field name="total_price" string="Thành tiền" readonly="1"/>
                   <field name="include_in_print" string="In?"/>
