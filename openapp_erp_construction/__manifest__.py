@@ -18,8 +18,6 @@
         "security/openapp_retention_rules.xml", 
         "data/sequence.xml",
         "data/retention_cron.xml",
-
-        "views/menu.xml",
         
         "views/boq_views.xml",
         "views/job_costing_views.xml",
@@ -43,6 +41,8 @@
 
         "views/site_dashboard_views.xml",
         "views/dashboard_views.xml",        
+
+        "views/menu.xml",
     ],
     "assets": {
         "web.assets_backend": [

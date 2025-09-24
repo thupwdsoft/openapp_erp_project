@@ -31,6 +31,13 @@
               action="openapp_erp_construction.action_openapp_mr"
               sequence="20"/>
 
+    <!-- MENU -->
+  <menuitem id="menu_openapp_subcontractors"
+            name="Nhà thầu phụ"
+            parent="menu_openapp_construction_ops"
+            action="openapp_erp_construction.action_res_partner_subcontractor"
+            sequence="25"/>
+
     <menuitem id="menu_openapp_subcontract"
               name="Hợp đồng thầu phụ"
               parent="menu_openapp_construction_ops"
