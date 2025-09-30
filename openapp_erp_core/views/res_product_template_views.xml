@@ -18,24 +18,19 @@
         <attribute name="groups">openapp_hide_product_cost.group_show_product_cost</attribute>
       </xpath>
 
-      <!-- Ẩn nút BOM / Compute price / View BOM (tuỳ phiên bản & module) -->
-      <!-- Smart button mở danh sách BoM -->
-      <xpath expr="//button[@name='%(mrp.action_mrp_bom_form)d']" position="attributes">
-        <attribute name="groups">openapp_hide_product_cost.group_show_product_cost</attribute>
-      </xpath>
-
-      <!-- Nút tính giá từ BoM -->
+      <!-- Ẩn các nút liên quan BOM/Compute (an toàn kể cả khi không cài MRP) -->
+      <!-- nút tính giá từ BoM (tồn tại trên nhiều phiên bản) -->
       <xpath expr="//button[@name='action_compute_price']" position="attributes">
         <attribute name="groups">openapp_hide_product_cost.group_show_product_cost</attribute>
       </xpath>
 
-      <!-- Một số bản dùng action xem BoM trên form -->
+      <!-- vài bản dùng action xem BoM -->
       <xpath expr="//button[@name='action_view_bom']" position="attributes">
         <attribute name="groups">openapp_hide_product_cost.group_show_product_cost</attribute>
       </xpath>
 
-      <!-- Phòng trường hợp tên khác nhưng có 'bom' trong name -->
-      <xpath expr="//button[contains(@name, 'bom')]" position="attributes">
+      <!-- fallback: bất kỳ nút nào có 'bom' trong name -->
+      <xpath expr="//button[contains(@name,'bom')]" position="attributes">
         <attribute name="groups">openapp_hide_product_cost.group_show_product_cost</attribute>
       </xpath>
 
@@ -65,5 +60,4 @@
       </xpath>
     </field>
   </record>
-
 </odoo>
