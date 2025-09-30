@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="view_repair_order_form_inherit_warranty_link" model="ir.ui.view">
+      <field name="name">repair.order.form.warranty.link</field>
+      <field name="model">repair.order</field>
+      <field name="inherit_id" ref="repair.view_repair_order_form"/>
+      <field name="arch" type="xml">
+
+        <!-- Cờ khóa nguồn để dùng trong readonly -->
+        <xpath expr="//sheet" position="inside">
+          <field name="source_locked" invisible="1"/>
+        </xpath>
+
+        <!-- KHÁCH HÀNG: readonly khi có nguồn + chặn mở link -->
+        <xpath expr="//field[@name='partner_id']" position="attributes">
+          <attribute name="readonly">source_locked or sale_order_id</attribute>
+          <attribute name="options">{'no_open': True}</attribute>
+        </xpath>
+
+        <!-- SẢN PHẨM / UoM / SERIAL: khóa khi có nguồn -->
+        <xpath expr="//field[@name='product_id']" position="attributes">
+          <attribute name="readonly">source_locked or (state in ['cancel','done'])</attribute>
+        </xpath>
+        <xpath expr="//field[@name='product_uom']" position="attributes">
+          <attribute name="readonly">source_locked or state != 'draft'</attribute>
+        </xpath>
+        <xpath expr="//field[@name='lot_id']" position="attributes">
+          <attribute name="readonly">source_locked or state == 'done'</attribute>
+        </xpath>
+        <!-- TAB MISC: khoá các trường cấu hình kho -->
+        <xpath expr="//page[@name='page_miscellaneous']//field[@name='picking_type_id']" position="attributes">
+          <attribute name="readonly">1</attribute>
+          <attribute name="options">{'no_open': True, 'no_create': True}</attribute>
+        </xpath>
+        <xpath expr="//page[@name='page_miscellaneous']//field[@name='product_location_src_id']" position="attributes">
+          <attribute name="readonly">1</attribute>
+          <attribute name="options">{'no_open': True, 'no_create': True}</attribute>
+        </xpath>
+        <xpath expr="//page[@name='page_miscellaneous']//field[@name='location_id']" position="attributes">
+          <attribute name="readonly">1</attribute>
+          <attribute name="options">{'no_open': True, 'no_create': True}</attribute>
+        </xpath>
+
+      </field>
+    </record>
+
+  </data>
+</odoo>

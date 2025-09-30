@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- FORM: ẩn Chi phí -->
+  <record id="view_product_template_hide_cost" model="ir.ui.view">
+    <field name="name">product.template.form.hide.cost</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_only_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='standard_price']" position="attributes">
+        <attribute name="groups">openapp_hide_product_cost.group_show_product_cost</attribute>
+      </xpath>
+      <xpath expr="//group[@name='group_standard_price']" position="attributes">
+        <attribute name="groups">openapp_hide_product_cost.group_show_product_cost</attribute>
+      </xpath>
+      <xpath expr="//a[contains(@string,'BoM') or contains(@name,'bom') or contains(@name,'compute')]" position="attributes">
+        <attribute name="groups">openapp_hide_product_cost.group_show_product_cost</attribute>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- TREE product.template: ẩn cột Chi phí -->
+  <record id="product_template_tree_hide_cost" model="ir.ui.view">
+    <field name="name">product.template.tree.hide.cost</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_tree_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='standard_price']" position="attributes">
+        <attribute name="groups">openapp_hide_product_cost.group_show_product_cost</attribute>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- (tuỳ chọn) TREE product.product: ẩn cột Chi phí -->
+  <record id="product_product_tree_hide_cost" model="ir.ui.view">
+    <field name="name">product.product.tree.hide.cost</field>
+    <field name="model">product.product</field>
+    <field name="inherit_id" ref="product.product_product_tree_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='standard_price']" position="attributes">
+        <attribute name="groups">openapp_hide_product_cost.group_show_product_cost</attribute>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- NÚT tạo đơn hàng trên header -->
+  <record id="product_template_form_quicksale_btn" model="ir.ui.view">
+    <field name="name">product.template.form.quicksale.btn</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_only_form_view"/>
+    <field name="priority" eval="99"/>
+    <field name="arch" type="xml">
+      <xpath expr="//form/header" position="inside">
+        <button name="action_open_quick_sale"
+                type="object"
+                string="Tạo đơn hàng"
+                class="btn-primary"
+                groups="sales_team.group_sale_salesman,sales_team.group_sale_manager"/>
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

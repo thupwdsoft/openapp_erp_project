@@ -1,0 +1,309 @@
+/* =============== CẤU HÌNH CHUNG =============== */
+:root{
+  --oa-icon-size: 14px;
+  --oa-icon-left: .70rem;
+  --oa-icon-opacity: .72;
+}
+
+/* ===== BASE: CHỈ áp dụng cho NHỮNG NÚT được map icon bên dưới ===== */
+.o_form_statusbar .o_statusbar_buttons
+  .btn:is(
+    /* PRODUCT */
+    [name="action_update_quantity_on_hand"],
+    [name="action_open_quants"],
+    [name="action_replenish"],
+    [name="action_product_replenish"],
+    [name*="label_layout"],
+    [name*="label"],
+    /* PICKING */
+    [name="action_confirm"],
+    [name="action_assign"],
+    [name="button_validate"],
+    [name="do_print_picking"],
+    [name="action_cancel"],
+    [type="action"][data-hotkey="o"],
+    [type="action"][data-hotkey="k"],
+    /* SALE ORDER */
+    #create_invoice,
+    #create_invoice_percentage,
+    #send_by_email_primary,
+    #send_by_email,
+    #action_confirm,
+    [name="create_invoice"],
+    [name="action_preview_sale_order"],
+    /* INVOICE */
+    [name="action_invoice_sent"],
+    [name="action_print_pdf"],
+    [name="preview_invoice"],
+    [name="action_post"],
+    [name="button_draft"],
+    [name="button_cancel"],
+    [name="action_reverse"],
+    [name="button_hash"],
+    /* WARRANTY / TICKET (header) */
+    [name="action_state_checking"],
+    [name="action_state_repairing"],
+    [name="action_state_done"],
+    [name="action_state_cancel"],
+    [name="action_report_helpdesk_ticket"],
+    [name="action_send_warranty_email"],
+    [name="action_print_warranty_card"],
+    /* REPAIR */
+    [name="action_create_repair_order"],
+    [name="action_open_repair_order"],
+    [name="action_receive_to_repair_zone"],
+    [name="action_repair_cancel"],
+    /*MAINTENANCE */
+    [name="action_unreserve"],
+    [name="action_create_maintenance_request"],
+    [type="action"][name="339"],
+    [type="action"][name="338"], /* << THÊM VÀO ĐÂY */
+    /*STOCK RETURN PICKING*/
+    [name="action_view_picking"],
+    [name="action_rfq_send"],
+    [name="action_create_invoice"],
+    [name="action_view_invoice"],
+    [name="button_confirm"],
+    [name="button_cancel"],
+    [name="button_draft"],
+    [name="action_open_quick_sale"]
+  ){
+  position: relative;
+  padding-left: 2rem;
+}
+
+.o_form_statusbar .o_statusbar_buttons
+  .btn:is(
+    /* như trên */
+    [name="action_update_quantity_on_hand"],
+    [name="action_open_quants"],
+    [name="action_replenish"],
+    [name="action_product_replenish"],
+    [name*="label_layout"],
+    [name*="label"],
+    [name="action_confirm"],
+    [name="action_assign"],
+    [name="button_validate"],
+    [name="do_print_picking"],
+    [name="action_cancel"],
+    [type="action"][data-hotkey="o"],
+    [type="action"][data-hotkey="k"],
+    #create_invoice,
+    #create_invoice_percentage,
+    #send_by_email_primary,
+    #send_by_email,
+    #action_confirm,
+    [name="create_invoice"],
+    [name="action_preview_sale_order"],
+    [name="action_invoice_sent"],
+    [name="action_print_pdf"],
+    [name="preview_invoice"],
+    [name="action_post"],
+    [name="button_draft"],
+    [name="button_cancel"],
+    [name="action_reverse"],
+    [name="button_hash"],
+    [name="action_state_checking"],
+    [name="action_state_repairing"],
+    [name="action_state_done"],
+    [name="action_state_cancel"],
+    [name="action_report_helpdesk_ticket"],
+    [name="action_send_warranty_email"],
+    [name="action_print_warranty_card"],
+    [name="action_create_repair_order"],
+    [name="action_open_repair_order"],
+    [name="action_receive_to_repair_zone"],
+    [name="action_repair_cancel"],
+    /*MAINTENANCE */
+    [name="action_unreserve"],
+    [name="action_create_maintenance_request"],
+    [type="action"][name="339"],
+    [type="action"][name="338"], /* << THÊM VÀO ĐÂY */
+    /*STOCK RETURN PICKING*/
+    [name="action_view_picking"],
+    [name="action_rfq_send"],
+    [name="action_create_invoice"],
+    [name="action_view_invoice"],
+    [name="button_confirm"],
+    [name="button_cancel"],
+    [name="button_draft"],
+    [name="action_open_quick_sale"]
+  )::before{
+  /* Ưu tiên FA5 vì Odoo 18 bundle FA5 Free */
+  font-family: "Font Awesome 5 Free","FontAwesome","Font Awesome 6 Free",
+               "Font Awesome 6 Pro","Font Awesome 5 Pro","FontAwesomeSolid" !important;
+  font-weight: 900; /* Solid */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  pointer-events: none;
+  position: absolute;
+  left: var(--oa-icon-left);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  font-size: var(--oa-icon-size);
+  line-height: 1;
+  opacity: var(--oa-icon-opacity);
+}
+
+/* Nút đang highlight thì icon đậm hơn */
+.o_form_statusbar .o_statusbar_buttons .btn.oe_highlight::before{ opacity:.9; }
+
+/* Không chèn icon vào stat tile / KPI */
+.o_control_panel_actions .o_stat_info::before,
+.o_control_panel_actions .o_stat_button::before{ content:none !important; }
+
+/* =============== PRODUCT (product.template) =============== */
+.o_form_statusbar .btn[name="action_update_quantity_on_hand"]::before,
+.o_form_statusbar .btn[name="action_open_quants"]::before{ content:"\f1b3"; } /* cubes */
+.o_form_statusbar .btn[name="action_replenish"]::before,
+.o_form_statusbar .btn[name="action_product_replenish"]::before{ content:"\f217"; } /* cart-plus */
+.o_form_statusbar .btn[name="action_open_label_layout"]::before,
+.o_form_statusbar .btn[name*="label_layout"]::before,
+.o_form_statusbar .btn[name*="label"]::before{ content:"\f02c"; } /* tags */
+
+/* =============== STOCK.PICKING =============== */
+.o_form_statusbar .btn[name="action_confirm"]::before{ content:"\f046"; } /* check-square */
+.o_form_statusbar .btn[name="action_assign"]::before{ content:"\f1b3"; } /* cubes */
+.o_form_statusbar .btn[name="button_validate"]::before{ content:"\f00c"; } /* check */
+.o_form_statusbar .btn[name="do_print_picking"]::before,
+.o_form_statusbar .btn[type="action"][data-hotkey="o"]::before{ content:"\f02f"; } /* print */
+.o_form_statusbar .btn[type="action"][data-hotkey="k"]::before{ content:"\f0e2"; } /* undo */
+.o_form_statusbar .btn[name="action_cancel"]::before{ content:"\f00d"; } /* times */
+
+/* =============== SALE.ORDER =============== */
+.o_form_statusbar .btn#create_invoice::before,
+.o_form_statusbar .btn[name="create_invoice"]::before{ content:"\f15c"; } /* file-lines */
+.o_form_statusbar .btn#create_invoice_percentage::before{ content:"\f295"; } /* percent */
+.o_form_statusbar .btn#send_by_email_primary::before,
+.o_form_statusbar .btn#send_by_email::before{ content:"\f0e0"; } /* envelope */
+.o_form_statusbar .btn[name="action_preview_sale_order"]::before{ content:"\f06e"; } /* eye */
+.o_form_statusbar .btn#action_confirm::before,
+.o_form_statusbar .btn[name="action_confirm"]#action_confirm::before{ content:"\f00c"; } /* check */
+.o_form_statusbar .btn[name="action_cancel"]::before{ content:"\f00d"; } /* times */
+
+/* =============== ACCOUNT.MOVE =============== */
+.o_form_statusbar .btn[name="action_invoice_sent"]::before{ content:"\f0e0"; } /* envelope */
+.o_form_statusbar .btn[name="action_print_pdf"]::before{ content:"\f02f"; } /* print */
+.o_form_statusbar .btn[name="preview_invoice"]::before{ content:"\f06e"; } /* eye */
+.o_form_statusbar .btn[name="action_post"]::before{ content:"\f00c"; } /* check */
+.o_form_statusbar .btn[name="button_draft"]::before{ content:"\f0e2"; } /* undo */
+.o_form_statusbar .btn[name="button_cancel"]::before{ content:"\f00d"; } /* times */
+.o_form_statusbar .btn[name="action_reverse"]::before{ content:"\f112"; } /* reply */
+.o_form_statusbar .btn[name="button_hash"]::before{ content:"\f023"; } /* lock */
+
+/* =============== WARRANTY / TICKET =============== */
+.o_form_statusbar .btn[name="action_state_checking"]::before{  content:"\f002" !important; } /* search */
+.o_form_statusbar .btn[name="action_state_repairing"]::before{ content:"\f0ad" !important; } /* wrench */
+.o_form_statusbar .btn[name="action_state_done"]::before{      content:"\f00c" !important; } /* check  */
+.o_form_statusbar .btn[name="action_state_cancel"]::before{    content:"\f00d" !important; } /* times  */
+.o_form_statusbar .btn[name="action_report_helpdesk_ticket"]::before{ content:"\f02f" !important; } /* print */
+
+/* Button box */
+.oe_button_box .oe_stat_button[name="action_open_warranty_card"]::before,
+.oe_button_box .o_stat_button[name="action_open_warranty_card"]::before{ content:"\f0c1" !important; } /* link */
+.oe_button_box .oe_stat_button[name="action_create_ticket"]::before,
+.oe_button_box .o_stat_button[name="action_create_ticket"]::before{ content:"\f145" !important; } /* ticket (FA4) */
+.oe_button_box .oe_stat_button[name="action_view_warranty_tickets"]::before,
+.oe_button_box .o_stat_button[name="action_view_warranty_tickets"]::before{ content:"\f1da" !important; } /* history */
+
+/* =============== REPAIR =============== */
+.o_form_statusbar .btn[name="action_create_repair_order"]::before,
+.o_form_statusbar .btn[name="action_open_repair_order"]::before{ content:"\f0ad"; } /* wrench */
+
+.o_list_view .btn[name="action_view_warranty_history"]::before,
+.o_list_view .btn-link[name="action_view_warranty_history"]::before{
+  font-family: "Font Awesome 5 Free","FontAwesome","Font Awesome 6 Free";
+  font-weight: 900;
+  content:"\f08e" !important; /* external-link */
+  margin-right:.35rem; opacity:.75; font-size:13px;
+}
+
+/* ================== REPAIR (repair.order) ================== */
+.o_form_statusbar .o_statusbar_buttons
+  .btn:is(
+    [name="action_validate"],
+    [name="action_repair_start"],
+    [name="action_repair_end"],
+    [name="action_cancel"],
+    [name="action_make_sale_order"],
+    [name="action_create_sale_order"],
+    [name="action_repair_order_make_sale_order"]
+  ){
+  position: relative;
+  padding-left: 2rem;
+}
+
+.o_form_statusbar .o_statusbar_buttons
+  .btn:has(i.o_button_icon)::before{
+  content: none !important;
+}
+
+.o_form_statusbar .btn[name="action_validate"]::before      { content:"\f00c"; } /* check */
+.o_form_statusbar .btn[name="action_repair_start"]::before  { content:"\f04b"; } /* play  */
+.o_form_statusbar .btn[name="action_repair_end"]::before    { content:"\f04d"; } /* stop  */
+.o_form_statusbar .btn[name="action_cancel"]::before        { content:"\f00d"; } /* times */
+
+.o_form_statusbar .btn[name="action_make_sale_order"]::before,
+.o_form_statusbar .btn[name="action_create_sale_order"]::before,
+.o_form_statusbar .btn[name="action_repair_order_make_sale_order"]::before{
+  content:"\f0f6"; /* file-text */
+}
+
+.o_form_statusbar .o_statusbar_buttons
+  .btn:is(
+    [name="action_validate"],
+    [name="action_repair_start"],
+    [name="action_repair_end"],
+    [name="action_cancel"],
+    [name="action_make_sale_order"],
+    [name="action_create_sale_order"],
+    [name="action_repair_order_make_sale_order"]
+  )::before{
+  font-family:"Font Awesome 6 Free","Font Awesome 5 Free","FontAwesome",
+              "Font Awesome 6 Pro","Font Awesome 5 Pro","FontAwesomeSolid" !important;
+  font-weight:900;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  pointer-events:none;
+  position:absolute; left:var(--oa-icon-left); top:50%;
+  transform:translateY(-50%);
+  display:inline-block; font-size:var(--oa-icon-size);
+  line-height:1; opacity:var(--oa-icon-opacity);
+}
+
+.o_form_statusbar .btn[name="action_send_warranty_email"]::before { content:"\f0e0"; } /* envelope */
+.o_form_statusbar .btn[name="action_print_warranty_card"]::before { content:"\f02f"; } /* print */
+
+.o_form_statusbar .btn[name="action_receive_to_repair_zone"]::before { content:"\f01c"; } /* inbox */
+
+.o_form_statusbar .btn[name="action_open_quick_sale"]::before{ content:"\f07a"; } /* shopping-cart */
+
+.oe_button_box .oe_stat_button[name="action_open_custody_picking"]::before,
+.oe_button_box .o_stat_button[name="action_open_custody_picking"]::before{
+  content:"\f0d1"; /* truck */
+}
+
+.o_form_statusbar .btn[name="action_repair_cancel"]::before{ content:"\f00d"; } /* times */
+
+.o_form_statusbar .btn[name="action_unreserve"]::before{ content:"\f0e2"; } /* undo */
+.o_form_statusbar .btn[name="action_create_maintenance_request"]::before{ content:"\f0ad"; } /* wrench */
+
+/* ====== BỔ SUNG HÀNG (đã bao gồm 338 & 339) ====== */
+.o_form_statusbar .btn[name="action_product_replenish"]::before,
+.o_form_statusbar .btn[name="action_replenish"]::before,
+.o_form_statusbar .btn[type="action"][name="338"]::before,
+.o_form_statusbar .btn[type="action"][name="339"]::before{
+  content:"\f217"; /* cart-plus */
+}
+
+/* 3) Stock return picking icons */
+.o_form_statusbar .btn[name="action_view_picking"]::before  { content:"\f0d1"; } /* truck */
+.o_form_statusbar .btn[name="action_rfq_send"]::before      { content:"\f0e0"; } /* envelope */
+.o_form_statusbar .btn[name="action_create_invoice"]::before{ content:"\f15c"; } /* file-alt */
+.o_form_statusbar .btn[name="action_view_invoice"]::before  { content:"\f06e"; } /* eye */
+.o_form_statusbar .btn[name="button_confirm"]::before       { content:"\f00c"; } /* check */
+.o_form_statusbar .btn[name="button_cancel"]::before        { content:"\f00d"; } /* times */
+.o_form_statusbar .btn[name="button_done"]::before          { content:"\f023"; } /* lock */
+.o_form_statusbar .btn[name="button_unlock"]::before        { content:"\f09c"; } /* unlock */
+.o_form_statusbar .btn[name="button_draft"]::before         { content:"\f0e2"; } /* undo */

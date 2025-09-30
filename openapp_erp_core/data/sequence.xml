@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+
+    <!-- Sequence cho Phiếu bảo hành -->
+    <record id="seq_warranty_card" model="ir.sequence">
+      <field name="name">Warranty Card</field>
+      <field name="code">warranty.card</field>
+      <field name="prefix">BH%(y)s%(month)s-</field>
+      <field name="padding">4</field>
+      <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- (tuỳ chọn) Sequence cho Ticket -->
+    <record id="seq_helpdesk_ticket" model="ir.sequence">
+      <field name="name">Helpdesk Ticket</field>
+      <field name="code">helpdesk.ticket</field>
+      <field name="prefix">HD%(y)s%(month)s-</field>
+      <field name="padding">4</field>
+      <field name="company_id" eval="False"/>
+    </record>
+
+  </data>
+</odoo>

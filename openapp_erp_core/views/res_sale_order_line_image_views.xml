@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="view_sale_order_form_add_product_image" model="ir.ui.view">
+            <field name="name">sale.order.form.add.product.image</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="priority">99</field>
+            <field name="arch" type="xml">
+                <!--  Odoo 18+: list  -->
+                <xpath expr="//field[@name='order_line']/list/field[1]" position="before">
+                    <field name="product_image_128" widget="image"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

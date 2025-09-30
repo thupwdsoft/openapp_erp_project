@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- Ẩn group "XUẤT HÓA ĐƠN": group chứa fiscal_position_id (hoặc payment_term_id / invoice_status) -->
+    <record id="view_so_hide_invoicing_group" model="ir.ui.view">
+      <field name="name">sale.order.form.hide.invoicing.group</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="priority" eval="300"/>
+      <field name="arch" type="xml">
+        <!-- Tìm field đặc trưng rồi leo lên group gần nhất -->
+        <xpath expr="(//form//sheet//field[@name='fiscal_position_id'] 
+                      | //form//sheet//field[@name='payment_term_id'] 
+                      | //form//sheet//field[@name='invoice_status'])/ancestor::group[1]"
+               position="attributes">
+          <attribute name="invisible">True</attribute>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Ẩn group "THEO DÕI": group chứa campaign_id / medium_id / source_id / client_order_ref -->
+    <record id="view_so_hide_tracking_group" model="ir.ui.view">
+      <field name="name">sale.order.form.hide.tracking.group</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="priority" eval="301"/>
+      <field name="arch" type="xml">
+        <xpath expr="(//form//sheet//field[@name='campaign_id'] 
+                      | //form//sheet//field[@name='medium_id'] 
+                      | //form//sheet//field[@name='source_id'] 
+                      | //form//sheet//field[@name='client_order_ref'])/ancestor::group[1]"
+               position="attributes">
+          <attribute name="invisible">True</attribute>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Ẩn (remove) tab Thông tin khác trên form sale.order -->
+    <record id="view_sale_order_form_hide_other_info" model="ir.ui.view">
+      <field name="name">sale.order.form.hide.other.info</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="priority" eval="1000"/>
+      <field name="arch" type="xml">
+        <!-- Ẩn tab bằng cách set invisible, an toàn hơn so với replace -->
+        <xpath expr="//form//sheet//page[@name='other_info' or @name='other_information']"
+               position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>
