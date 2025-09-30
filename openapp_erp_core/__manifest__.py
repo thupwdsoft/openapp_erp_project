@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "OpenApp Core Tweaks",
-    "version": "18.0.1.0",
-    "summary": "UI tweaks & small views for Sale and Repair",
+    "name": "OpenApp ERP Core",
+    "version": "18.0.1.1",
+    "summary": "UI tweaks & small views",
     "author": "OpenApp",
     "depends": [
         "base",         # nền tảng
@@ -18,9 +18,9 @@
     "data": [
         "security/groups.xml",
         "views/res_sale_order_views.xml",
-        "views/res_product_template_views.xml",
+        #"views/res_product_template_views.xml",
         "views/res_sale_order_line_image_views.xml",
-        "views/repair_order_lock_views.xml",
+        #"views/repair_order_lock_views.xml",
         "views/res_partner_inherit.xml",
     ],
     "assets": {
