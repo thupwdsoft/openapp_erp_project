@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_banner_slide_admin,access.banner.slide.admin,model_banner_slide,base.group_system,1,1,1,1
+access_banner_slide_user,access.banner.slide.user,model_banner_slide,,1,0,0,0
+access_product_category_user,access.product.category.user,model_product_category,,1,0,0,0
+access_ir_attachment_user,access.ir.attachment.user,model_ir_attachment,,1,0,0,0
+access_product_template_public,access.product.template.public,model_product_template,base.group_public,1,0,0,0
+access_product_category_public,access.product.category.public,model_product_category,base.group_public,1,0,0,0
+access_res_company_public,access.res.company.public,model_res_company,base.group_public,1,0,0,0
