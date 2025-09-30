@@ -10,8 +10,8 @@
         "mail",       
         "product",      # nút Quick Sale trên product.template
         "sale",         # các view sale.order/*
-        "repair",       # view khoá nguồn trên repair.order
         "stock",        
+        "mrp",
         "sale_stock",
         "calendar",
     ],
