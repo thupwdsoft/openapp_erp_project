@@ -53,12 +53,13 @@
     [name="action_open_repair_order"],
     [name="action_receive_to_repair_zone"],
     [name="action_repair_cancel"],
-    /*MAINTENANCE */
+    /* MAINTENANCE */
     [name="action_unreserve"],
     [name="action_create_maintenance_request"],
     [type="action"][name="339"],
-    [type="action"][name="338"], /* << THÊM VÀO ĐÂY */
-    /*STOCK RETURN PICKING*/
+    [type="action"][name="338"],
+    [type="action"][name="343"],
+    /* STOCK RETURN PICKING */
     [name="action_view_picking"],
     [name="action_rfq_send"],
     [name="action_create_invoice"],
@@ -66,7 +67,12 @@
     [name="button_confirm"],
     [name="button_cancel"],
     [name="button_draft"],
-    [name="action_open_quick_sale"]
+    [name="action_open_quick_sale"],
+    /* >>> MRP.PRODUCTION mới thêm <<< */
+    [name="button_mark_done"],
+    [name="button_plan"],
+    [name="action_start"],
+    [name="do_unreserve"]
   ){
   position: relative;
   padding-left: 2rem;
@@ -114,12 +120,12 @@
     [name="action_open_repair_order"],
     [name="action_receive_to_repair_zone"],
     [name="action_repair_cancel"],
-    /*MAINTENANCE */
+    /* MAINTENANCE */
     [name="action_unreserve"],
     [name="action_create_maintenance_request"],
     [type="action"][name="339"],
-    [type="action"][name="338"], /* << THÊM VÀO ĐÂY */
-    /*STOCK RETURN PICKING*/
+    [type="action"][name="338"],
+    /* STOCK RETURN PICKING */
     [name="action_view_picking"],
     [name="action_rfq_send"],
     [name="action_create_invoice"],
@@ -127,9 +133,14 @@
     [name="button_confirm"],
     [name="button_cancel"],
     [name="button_draft"],
-    [name="action_open_quick_sale"]
+    [name="action_open_quick_sale"],
+    /* >>> MRP.PRODUCTION mới thêm <<< */
+    [name="button_mark_done"],
+    [name="button_plan"],
+    [name="action_start"],
+    [name="do_unreserve"],
+    [type="action"][name="343"]
   )::before{
-  /* Ưu tiên FA5 vì Odoo 18 bundle FA5 Free */
   font-family: "Font Awesome 5 Free","FontAwesome","Font Awesome 6 Free",
                "Font Awesome 6 Pro","Font Awesome 5 Pro","FontAwesomeSolid" !important;
   font-weight: 900; /* Solid */
@@ -164,7 +175,7 @@
 
 /* =============== STOCK.PICKING =============== */
 .o_form_statusbar .btn[name="action_confirm"]::before{ content:"\f046"; } /* check-square */
-.o_form_statusbar .btn[name="action_assign"]::before{ content:"\f1b3"; } /* cubes */
+.o_form_statusbar .btn[name="action_assign"]::before{ content:"\f002"; } /* search */
 .o_form_statusbar .btn[name="button_validate"]::before{ content:"\f00c"; } /* check */
 .o_form_statusbar .btn[name="do_print_picking"]::before,
 .o_form_statusbar .btn[type="action"][data-hotkey="o"]::before{ content:"\f02f"; } /* print */
@@ -296,6 +307,9 @@
 .o_form_statusbar .btn[type="action"][name="339"]::before{
   content:"\f217"; /* cart-plus */
 }
+.o_form_statusbar .btn[type="action"][name="343"]::before { 
+  content:"\f217"; /* cart-plus */
+}
 
 /* 3) Stock return picking icons */
 .o_form_statusbar .btn[name="action_view_picking"]::before  { content:"\f0d1"; } /* truck */
@@ -307,3 +321,11 @@
 .o_form_statusbar .btn[name="button_done"]::before          { content:"\f023"; } /* lock */
 .o_form_statusbar .btn[name="button_unlock"]::before        { content:"\f09c"; } /* unlock */
 .o_form_statusbar .btn[name="button_draft"]::before         { content:"\f0e2"; } /* undo */
+
+/* =============== MRP.PRODUCTION (Sản xuất) =============== */
+.o_form_statusbar .btn[name="button_mark_done"]::before { content:"\f058"; } /* check-circle: Sản xuất tất cả */
+.o_form_statusbar .btn[name="button_plan"]::before      { content:"\f073"; } /* calendar: Kế hoạch */
+.o_form_statusbar .btn[name="action_start"]::before     { content:"\f04b"; } /* play: Bắt đầu */
+.o_form_statusbar .btn[name="action_assign"]::before    { content:"\f002"; } /* search: Kiểm tra tình trạng còn hàng */
+.o_form_statusbar .btn[name="do_unreserve"]::before     { content:"\f0e2"; } /* undo: Hủy dự trữ */
+/* Hủy đã map chung ở trên: action_cancel -> times */
